@@ -6,7 +6,7 @@
 
 SimpleCheck(int A[], int start, int  end)
 {
-	if (A[end] - A[start] < end - start)
+	if (A[end] - A[start] > end - start)
 		return 1; 
 	else 
 		return 0;
@@ -31,7 +31,7 @@ SolveC(int A[],int  start,int  end)
 	if (end < start)
 		return 0;
 	int m = (end + start) / 2;
-	if (A[m] = m)
+	if (A[m] == m)
 		return 1;
 	if (A[m] > m)
 		return SolveC(A, start, m - 1);
@@ -72,18 +72,18 @@ int main()
 	switch (choise)
 	{
 	case 1://a,b
-		if (SimpleCheck(A, 0, SIZE) == 1)
+		if (SimpleCheck(A, 0, SIZE-1) == 1)
 		{
-
+			printf("\nb solve : %d \n", SolveB(A, 0, SIZE - 1));
 		}
 		else
 		{
-
+			printf("\nthere is not such number.\n");
 		}
 			
 		break;
 	case 2://c
-		if (SolveC(A, 0, SIZE - 1))
+		if (SolveC(A, 0, SIZE-1))
 			printf("\nthere is a A[i]=i \n");
 		else
 			printf("\nthere is no  a A[i]=i \n");
