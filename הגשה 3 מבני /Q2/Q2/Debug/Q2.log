@@ -1,5 +1,0 @@
-﻿  list_Q2.c
-  main.c
-  Generating Code...
-c:\users\afeka\desktop\q2\q2\list_q2.c(65): warning C4716: 'addNode': must return a value
-  Q2.vcxproj -> C:\Users\afeka\Desktop\Q2\Debug\Q2.exe
