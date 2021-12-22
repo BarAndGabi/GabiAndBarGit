@@ -12,6 +12,11 @@ typedef struct {
 	Node head;
 	Node* tail;
 }LIST;
+
+int L_init(LIST* pList);
+Node* L_insert(Node* pNode, int Value, LIST* pList);
+void createListFromArr(LIST* pLst, const int* arr, int size);
 int addNode(Node *addThis, LIST *ResultList);
 Node *combine_lists(Node *head1, Node *head2);
+void L_print(LIST* pList);
 #endif
