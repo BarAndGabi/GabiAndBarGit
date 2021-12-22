@@ -17,11 +17,9 @@ Node *combine_lists(Node *head1, Node *head2)
 	int turn = 1;
 	int flag1 = 0;
 	int flag2 = 0;
-	//int sum = flag1 + flag2;
 	while (flag1 == 0 || flag2 == 0)
 	{
-		
-	
+
 		switch (turn)
 		{
 		case 1:
@@ -29,11 +27,11 @@ Node *combine_lists(Node *head1, Node *head2)
 			{
 				tail1 = tail1->next;
 			}
-			L_insert(tail1,tail1->num,ResultList);
+			L_insert(tail1, tail1->num, ResultList);
 			tail1 = tail1->next;
-			
+
 			break;
-		case -1: 
+		case -1:
 			if (tail2 == head2)
 			{
 				tail2 = tail2->next;
@@ -47,87 +45,65 @@ Node *combine_lists(Node *head1, Node *head2)
 			flag1 = 1;
 		if (tail2 == head2)
 			flag2 = 1;
-
 	}
 
 	return &ResultList->head;
 }
-int addNode(Node *addThis, LIST *ResultList)
-{
-	Node* tmp;
 
-	//add node to list and change the new tail.
-	if (&ResultList->head == NULL) {
-		//If list is empty, both head and tail would point to new node.  
-		ResultList->head = *addThis;
-		ResultList->tail = addThis;
-		addThis->next = &(ResultList->head);
-	}
-	else 
-	{
-		//tail will point to new node.  
-		ResultList->tail->next = addThis;
-		//New node will become new tail.  
-		ResultList->tail = addThis;
-		//Since, it is circular linked list tail will point to head.  
-		ResultList->tail->next = &(ResultList->head);
-	}
-	return 1;
-}
-
-int L_init(LIST* pList)
+int L_init(LIST *pList)
 {
 	if (pList == NULL)
-		return 0;	// no list to initialize
+		return 0; // no list to initialize
 
 	pList->head.next = NULL;
-	pList->tail =&pList->head;
+	pList->tail = &pList->head;
 	return 1;
 }
 
-
-Node* L_insert(Node* pNode, int Value,LIST* pList)
+Node *L_insert(Node *pNode, int Value, LIST *pList)
 {
-	Node* tmp;
+	Node *tmp;
 
 	if (!pNode)
 		return NULL;
 
-	tmp = (Node*)malloc(sizeof(Node));	// new node
+	tmp = (Node *)malloc(sizeof(Node)); // new node
 
-	if (tmp != NULL) {
-		if (&pList->head == NULL) {
+	if (tmp != NULL)
+	{
+		if (&pList->head == NULL)
+		{
 			tmp->num = Value;
 			tmp->next = &pList->head;
 			pList->tail = tmp;
 			pList->head.next = pList->tail;
 		}
-		else {
+		else
+		{
 			tmp->num = Value;
 			tmp->next = &pList->head;
 			pList->tail->next = tmp;
 			pList->tail = tmp;
 		}
-
 	}
 	return tmp;
-
 }
 
-void createListFromArr(LIST* pLst, const int* arr, int size)
+void createListFromArr(LIST *pLst, const int *arr, int size)
 {
-	Node* pN = &pLst->head;
+	Node *pN = &pLst->head;
 	for (int i = 0; i < size; i++)
-		pN = L_insert(pN, arr[i],pLst);
+		pN = L_insert(pN, arr[i], pLst);
 }
 
-void L_print(LIST* pList) {
+void L_print(LIST *pList)
+{
 	if (!pList)
 		printf("list is empty");
 
-	for (Node* tmp = pList->head.next; tmp != &pList->head; tmp = tmp->next) {
+	for (Node *tmp = pList->head.next; tmp != &pList->head; tmp = tmp->next)
+	{
 		printf("%d ", tmp->num);
 	}
 	printf("\n");
 }
-
