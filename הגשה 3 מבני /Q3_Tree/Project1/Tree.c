@@ -1,13 +1,13 @@
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "Tree.h"
 
-void RangeSearch( tree_ptr base, itemType u, itemType v)
+void RangeSearch(tree_ptr base, itemType u, itemType v)
 {
-	itemType currenValue = base->info;
 	if (isEmpty(base))
-		return ;
+		return;
+	itemType currenValue = base->info;
 	if (u < currenValue)
 		RangeSearch(base->left, u, v);
 
@@ -24,3 +24,12 @@ int isEmpty(tree_ptr p)
 	return 0;
 }
 
+tree_ptr addNode(int info)
+{
+	tree_ptr temp = (tree_ptr) malloc(sizeof(tree_ptr));
+	temp->info = info;
+	temp->left = NULL;
+	temp->right = NULL;
+
+	return temp;
+}
