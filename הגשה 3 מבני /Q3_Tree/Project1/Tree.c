@@ -26,7 +26,7 @@ int isEmpty(tree_ptr p)
 
 tree_ptr addNode(int info)
 {
-	tree_ptr temp = (tree_ptr) malloc(sizeof(tree_ptr));
+	tree_ptr temp = (tree_ptr)malloc(sizeof(tree_ptr));
 	temp->info = info;
 	temp->left = NULL;
 	temp->right = NULL;
