@@ -31,7 +31,7 @@ BOOL L_init(LIST* pList)
 //			a value to be stored in the new node
 // Output:	pointer to the new node
 /////////////////////////////////////////////////////////////////
-NODE* L_insert(NODE* pNode, DATA Value)
+NODE* L_insert(NODE* pNode, void* Value)
 {
 	NODE* tmp;
 
