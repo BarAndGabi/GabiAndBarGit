@@ -30,13 +30,23 @@ int	addFlight(Airline* pComp,const AirportManager* pManager)
 		return 0;
 	initFlight(pComp->flightArr[pComp->flightCount],pManager);
 
-	addDateToList( &pComp->flightArr[pComp->flightCount]->date);
+	addDateToList( pComp, &pComp->flightArr[pComp->flightCount]->date);
 	pComp->flightCount++;
 	return 1;
 }
-int addDateToList(Date* d)
+int addDateToList(Airline * pComp, Date* d)
 {
-	return 0;
+	NODE* runner = &pComp->Dates.head;
+	while (runner->next != NULL)
+	{
+		if (isBetweenOrEqualToFirst(runner->next->key, runner->next->next->key, d))
+		{
+			L_insert(runner, d);
+			return 1;
+		}
+	}
+	L_insert(runner, d);
+	return 1;
 }
 void printCompany(const Airline* pComp)
 {

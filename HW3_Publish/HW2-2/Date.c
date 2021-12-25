@@ -49,3 +49,31 @@ void printDate(const Date* pDate)
 {
 	printf("Date: %d/%d/%d\n", pDate->day, pDate->month, pDate->year);
 }
+int compare_dates(Date d1, Date d2)
+{
+	if (d1.year < d2.year)
+		return -1;
+
+	else if (d1.year > d2.year)
+		return 1;
+
+	if (d1.year == d2.year)
+	{
+		if (d1.month < d2.month)
+			return -1;
+		else if (d1.month > d2.month)
+			return 1;
+		else if (d1.day < d2.day)
+			return -1;
+		else if (d1.day > d2.day)
+			return 1;
+		else
+			return 0;
+	}
+	return -2;
+}
+
+int isBetweenOrEqualToFirst(Date* d1, Date* d2, Date *x)
+{
+	return 0;
+}

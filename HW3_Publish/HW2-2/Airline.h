@@ -23,7 +23,7 @@ void	doPrintFlightsWithPlaneCode(const Airline* pComp);
 void	doPrintFlightsWithPlaneType(const Airline* pComp);
 void	freeFlightArr(Flight** arr, int size);
 void	freeCompany(Airline* pComp);
-int		addDateToList(Date * d);
+int		addDateToList(Airline* pComp,Date * d);
 
 #endif
 
