@@ -1,13 +1,8 @@
-﻿  Address.c
-  Airline.c
-  Airport.c
+﻿  Airline.c
   AirportManager.c
-  Date.c
+c:\users\afeka\desktop\hw3_publish\hw2-2\airportmanager.c(109): warning C4047: 'return': 'int' differs in levels of indirection from 'void *'
+c:\users\afeka\desktop\hw3_publish\hw2-2\airportmanager.c(113): warning C4047: 'return': 'int' differs in levels of indirection from 'void *'
   Flight.c
-  General.c
-  list.c
   main.c
-  Plane.c
-  test.c
   Generating Code...
-  HW2.vcxproj -> C:\Users\afeka\Desktop\HW2-2\x64\Debug\HW2.exe
+  HW2.vcxproj -> C:\Users\afeka\Desktop\HW3_Publish\HW2-2\x64\Debug\HW2.exe
