@@ -16,7 +16,7 @@ Airport* findAirportByName(const AirportManager* pManager, const char* name);
 int		checkUniqeName(const char* name, const AirportManager* pManager);
 void	printAirports(const AirportManager* pManager);
 void    writeAirportsToFile(const char* fileName, AirportManager* pManager);
-int     readAirportsFromFile(const char* fileName, AirportManager* pManager);
+Airport*    readAirportsFromFile(const char* fileName, int* size);
 void	freeManager(AirportManager* pManager);
 void    freeAirportsArr(Airport* ports,int size);
 #endif

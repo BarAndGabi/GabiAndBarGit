@@ -3,6 +3,7 @@
 #include "Airline.h"
 #include "AirportManager.h"
 #include "General.h"
+#define TEXT_FILE "airport_authority.txt"
 
 typedef enum 
 { 
@@ -23,8 +24,11 @@ int main()
 {
 	AirportManager	manager;
 	Airline			company;
-
-	initManager(&manager);
+	Airport* arr;
+	arr=readAirportsFromFile(TEXT_FILE, &manager.airportsCount);
+	if(&manager==NULL)
+	    initManager(&manager);
+	printAirports(&manager);
 	initAirline(&company);
 
 	int option;

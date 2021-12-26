@@ -53,15 +53,14 @@ void writeToFileAirport(FILE * pF, Airport * pPort)
 
 int readFromFileAirport(FILE * pF, Airport * pPort)
 {
-	char temp[255];
-	char temp1[255];
-	if (fscanf(pF, "%s %s", temp, temp1) != 2) {
+	char line[255];
+	char line2[225];
+	if (fgets(line, sizeof(line), pF) == NULL)
 		return 0;
-	}
-	strcat(pPort->name, temp);
-	strcat(pPort->address, temp1);
-	if(!pPort->address||!pPort->name)
-	return 0;
+	pPort->name = line;
+	if (fscanf(pF, "%s ", line2) != 1)
+		return 0;
+	pPort->address = line2;
 
 	return 1;
 }

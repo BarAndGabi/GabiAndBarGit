@@ -69,3 +69,13 @@ char**	splitCharsToWords(char* str, int* pCount, int* pTotalLength)
 	*pCount = count;
 	return wordsArray;
 }
+int getLineFromFile(FILE *f, char* a)
+{
+	char line[255];
+	{	if (fgets(line, sizeof(line), f) == NULL )
+
+		return 0;
+	}
+	strcpy(a, line);
+	return 1 ; 
+}
