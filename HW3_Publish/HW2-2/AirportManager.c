@@ -87,9 +87,67 @@ void	printAirports(const AirportManager* pManager)
 	}
 }
 
+void writeAirportsToFile(const char * fileName, AirportManager * pManager)
+{
+	FILE* pF = fopen(fileName, "w");
+	if (!pF)
+		printf("There isnt a file to read from");
+    
+	fprintf(pF, "Number of Airports:%d\n",pManager->airportsCount);
+
+	for (size_t i = 0; i < pManager->airportsCount; i++)
+		writeToFileAirport(pF, &pManager->airportsArr[i]);
+
+	fclose(pF);
+}
+
+int readAirportsFromFile(const char * fileName, AirportManager * pManager)
+{
+	//wasnt sure rather to enter a new airport manager or init one;
+	FILE* pF = fopen(fileName, "r");
+	if (!pF)
+		return 0;
+	if (fscanf(pF, "%d", pManager->airportsCount) != 1)
+	{
+		fclose(pF);
+		return 0;
+	}
+
+	Airport* ports = (Airport*)malloc(pManager->airportsCount * sizeof(Airport));
+	if(!ports)
+	{
+		free(ports);
+		fclose(pF);
+		return 0;
+	}
+	for (size_t i = 0; i < pManager->airportsCount; i++)
+	{
+		if (!readFromFileAirport(pF,&ports[i])) 
+		{
+			freeAirportsArr(ports, pManager->airportsCount);
+			free(ports);
+			fclose(pF);
+			return 0;
+		}
+	}
+
+	pManager->airportsArr = ports;
+
+	return 1;
+}
+
 void	freeManager(AirportManager* pManager)
 {
 	for (int i = 0; i < pManager->airportsCount; i++)
 		freeAirport(&pManager->airportsArr[i]);
-	free(pManager->airportsArr);
+	    free(pManager->airportsArr);
 }
+
+void freeAirportsArr(Airport * ports,int size)
+{
+	for (size_t i = 0; i < size; i++)
+	{
+		free(&ports[i]);
+	}
+}
+

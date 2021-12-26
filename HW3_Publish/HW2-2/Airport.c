@@ -46,3 +46,24 @@ void	freeAirport(Airport* pPort)
 	free(pPort->address);
 }
 
+void writeToFileAirport(FILE * pF, Airport * pPort)
+{
+	fprintf(pF, "%s\n%s\n", pPort->name, pPort->address);
+}
+
+int readFromFileAirport(FILE * pF, Airport * pPort)
+{
+	char temp[255];
+	char temp1[255];
+	if (fscanf(pF, "%s %s", temp, temp1) != 2) {
+		return 0;
+	}
+	strcat(pPort->name, temp);
+	strcat(pPort->address, temp1);
+	if(!pPort->address||!pPort->name)
+	return 0;
+
+	return 1;
+}
+
+

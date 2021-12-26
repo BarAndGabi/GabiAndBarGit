@@ -13,5 +13,6 @@ int		isAirportName(const Airport* pPort1, const char* name);
 void	initAirportNoName(Airport* pPort);
 void	printAirport(const Airport* pPort);
 void	freeAirport(Airport* pPort);
-
+void    writeToFileAirport(FILE* pF, Airport* pPort);
+int     readFromFileAirport(FILE* pF, Airport* pPort);
 #endif
