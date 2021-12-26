@@ -13,6 +13,6 @@ typedef struct
 void	getCorrectDate(Date* pDate);
 int		checkDate(char* date, Date* pDate);
 void	printDate(const Date* pDate);
-int compare_dates(Date d1, Date d2);
+int compare_dates(Date *d1, Date* d2);
 int isBetweenOrEqualToFirst(Date* d1, Date* d2,Date* x);
 #endif
