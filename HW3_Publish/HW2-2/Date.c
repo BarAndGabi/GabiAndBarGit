@@ -77,13 +77,16 @@ int isBetweenOrEqualToFirst(Date *d1, Date *d2, Date *x)
 	switch (compare_dates(d1, x))
 	{
 	case -1:
-		/* code */
+		if (compare_dates(d2, x) == -1)
+			return 1;
+		else
+			return 0;
 		break;
 	case 0:
 		return 1;
 		break;
 	case 1:
-		/* code */
+		return 0;
 		break;
 	default:
 		break;

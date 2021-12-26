@@ -37,11 +37,16 @@ int	addFlight(Airline* pComp,const AirportManager* pManager)
 int addDateToList(Airline * pComp, Date* d)
 {
 	NODE* runner = &pComp->Dates.head;
+	if(compare_dates(runner->next->key,d))
+	{
+			L_insert(runner, d);
+			return 1;
+	}
 	while (runner->next != NULL)
 	{
 		if (isBetweenOrEqualToFirst(runner->next->key, runner->next->next->key, d))
 		{
-			L_insert(runner, d);
+			L_insert(runner->next, d);
 			return 1;
 		}
 	}
