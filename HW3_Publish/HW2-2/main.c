@@ -71,6 +71,7 @@ int main()
 
 		case EXIT:
 			printf("Bye bye\n");
+			writeAirportsToFile(TEXT_FILE, &manager);
 			stop = 1;
 			break;
 

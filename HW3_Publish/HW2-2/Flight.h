@@ -21,5 +21,7 @@ Airport*	setAiportToFlight(const AirportManager* pManager, const char* msg);
 int		isPlaneCodeInFlight(const Flight* pFlight, const char*  code);
 int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type);
 void	freeFlight(Flight* pFlight);
+int     writeStudentToBFile(FILE* pFile, Flight* pF);
+int     readStudentFromFile(FILE* pFile, Flight* pF);
 
 #endif

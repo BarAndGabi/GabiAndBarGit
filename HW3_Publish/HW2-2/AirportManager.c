@@ -93,7 +93,7 @@ void writeAirportsToFile(const char * fileName, AirportManager * pManager)
 	if (!pF)
 		printf("There isnt a file to read from");
     
-	fprintf(pF, "Number of Airports:%d\n",pManager->airportsCount);
+	fprintf(pF, "%d\n",pManager->airportsCount);
 
 	for (size_t i = 0; i < pManager->airportsCount; i++)
 		writeToFileAirport(pF, &pManager->airportsArr[i]);

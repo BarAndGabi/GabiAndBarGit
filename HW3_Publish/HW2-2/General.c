@@ -69,13 +69,21 @@ char**	splitCharsToWords(char* str, int* pCount, int* pTotalLength)
 	*pCount = count;
 	return wordsArray;
 }
-int getLineFromFile(FILE *f, char* a)
+void removeChar(char * str, char charToRemmove)
 {
-	char line[255];
-	{	if (fgets(line, sizeof(line), f) == NULL )
-
-		return 0;
+	int i, j;
+	size_t len = strlen(str);
+	for (i = 0; i < len; i++)
+	{
+		if (str[i] == charToRemmove)
+		{
+			for (j = i; j < len; j++)
+			{
+				str[j] = str[j + 1];
+			}
+			len--;
+			i--;
+		}
 	}
-	strcpy(a, line);
-	return 1 ; 
+
 }

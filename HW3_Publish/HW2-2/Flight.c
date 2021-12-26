@@ -86,3 +86,10 @@ void	freeFlight(Flight* pFlight)
 	free(pFlight->nameDest);
 	free(pFlight);
 }
+
+int writeStudentToBFile(FILE * pFile, Flight * pF)
+{
+	int len = strlen(pF->nameDest);
+	if(fwrite())
+	return 0;
+}

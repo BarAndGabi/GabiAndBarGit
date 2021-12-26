@@ -58,6 +58,7 @@ int readFromFileAirport(FILE * pF, Airport * pPort)
 	if (fgets(line, sizeof(line), pF) == NULL)
 		return 0;
 	pPort->name =_strdup(line);
+	removeChar(pPort->name, '\n');
 	if (!pPort->name)
 		free(pPort->name);
 	if (fscanf(pF, "%s ", line2) != 1)
