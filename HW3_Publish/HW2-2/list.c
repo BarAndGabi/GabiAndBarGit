@@ -122,13 +122,12 @@ int L_print(const LIST* pList, void(*printKeyValue)(void*))
 	if (!pList)
 		return False;
 
-	printf("\n");
 	tmp = pList->head.next;
 	while (tmp != NULL)
 	{
-
-		printKeyValue(tmp->key);
+		printf("%d)   ", c + 1);
 		printf(" ---> ");
+		printKeyValue(tmp->key);
 		c++;
 		tmp = tmp->next;
 	}

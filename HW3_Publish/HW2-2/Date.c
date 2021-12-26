@@ -89,6 +89,7 @@ int isBetweenOrEqualToFirst(Date *d1, Date *d2, Date *x)
 		return 0;
 		break;
 	default:
+		return 0;
 		break;
 	}
 }

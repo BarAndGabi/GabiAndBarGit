@@ -15,48 +15,59 @@ void	initAirline(Airline* pComp)
 	L_init(&pComp->Dates);
 }
 
-int	addFlight(Airline* pComp,const AirportManager* pManager)
+int	addFlight(Airline* pComp, const AirportManager* pManager)
 {
 	if (pManager->airportsCount < 2)
 	{
 		printf("There are not enough airport to set a flight\n");
 		return 0;
 	}
-	pComp->flightArr = (Flight**)realloc(pComp->flightArr, (pComp->flightCount+1) * sizeof(Flight*));
+	pComp->flightArr = (Flight**)realloc(pComp->flightArr, (pComp->flightCount + 1) * sizeof(Flight*));
 	if (!pComp->flightArr)
 		return 0;
-	pComp->flightArr[pComp->flightCount] = (Flight*)calloc(1,sizeof(Flight));
+	pComp->flightArr[pComp->flightCount] = (Flight*)calloc(1, sizeof(Flight));
 	if (!pComp->flightArr[pComp->flightCount])
 		return 0;
-	initFlight(pComp->flightArr[pComp->flightCount],pManager);
+	initFlight(pComp->flightArr[pComp->flightCount], pManager);
 
-	addDateToList( pComp, &pComp->flightArr[pComp->flightCount]->date);
+	addDateToList(pComp, &pComp->flightArr[pComp->flightCount]->date);
 	pComp->flightCount++;
 	return 1;
 }
 int addDateToList(Airline * pComp, Date* d)
 {
 	NODE* runner = &pComp->Dates.head;
-	if(compare_dates(runner->next->key,d))
+	if (runner->next == NULL)
 	{
+		L_insert(runner, d);
+		return 1;
+	}
+	else
+		if (compare_dates(runner->next->key, d) == 1)
+		{
 			L_insert(runner, d);
 			return 1;
-	}
+		}
+	runner = runner->next;
 	while (runner->next != NULL)
 	{
-		if (isBetweenOrEqualToFirst(runner->next->key, runner->next->next->key, d))
-		{
-			L_insert(runner->next, d);
-			return 1;
-		}
+		
+			if (isBetweenOrEqualToFirst(runner->key, runner->next->key, d))
+			{
+				L_insert(runner->next, d);
+				return 1;
+			}
+			runner = runner->next;
+		
 	}
 	L_insert(runner, d);
+
 	return 1;
 }
 void printCompany(const Airline* pComp)
 {
 	printf("Airline %s\n", pComp->name);
-	printf("Has %d flights\n",pComp->flightCount);
+	printf("Has %d flights\n", pComp->flightCount);
 	printFlightArr(pComp->flightArr, pComp->flightCount);
 	L_print(&pComp->Dates, printDate);
 }
@@ -100,7 +111,7 @@ void	doPrintFlightsWithPlaneCode(const Airline* pComp)
 {
 	char code[MAX_STR_LEN];
 	getPlaneCode(code);
-	printf("All flights with plane code %s:\n",code);
+	printf("All flights with plane code %s:\n", code);
 	for (int i = 0; i < pComp->flightCount; i++)
 	{
 		if (isPlaneCodeInFlight(pComp->flightArr[i], code))
