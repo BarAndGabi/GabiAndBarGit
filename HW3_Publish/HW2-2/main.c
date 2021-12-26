@@ -24,11 +24,9 @@ int main()
 {
 	AirportManager	manager;
 	Airline			company;
-	Airport* arr;
-	arr=readAirportsFromFile(TEXT_FILE, &manager.airportsCount);
+	manager.airportsArr=readAirportsFromFile(TEXT_FILE, &manager.airportsCount);
 	if(&manager==NULL)
 	    initManager(&manager);
-	printAirports(&manager);
 	initAirline(&company);
 
 	int option;

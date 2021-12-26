@@ -101,42 +101,7 @@ void writeAirportsToFile(const char * fileName, AirportManager * pManager)
 	fclose(pF);
 }
 
-<<<<<<< Updated upstream
-//int readAirportsFromFile(const char * fileName, AirportManager * pManager)
-//{
-//	//wasnt sure rather to enter a new airport manager or init one;
-//	FILE* pF = fopen(fileName, "r");
-//	if (!pF)
-//		return 0;
-//	if (fscanf(pF, "%d", pManager->airportsCount) != 1)
-//	{
-//		fclose(pF);
-//		return 0;
-//	}
-//
-//	Airport* ports = (Airport*)malloc(pManager->airportsCount * sizeof(Airport));
-//	if(!ports)
-//	{
-//		free(ports);
-//		fclose(pF);
-//		return 0;
-//	}
-//	for (size_t i = 0; i < pManager->airportsCount; i++)
-//	{
-//		if (!readFromFileAirport(pF,&ports[i])) 
-//		{
-//			freeAirportsArr(ports, pManager->airportsCount);
-//			free(ports);
-//			fclose(pF);
-//			return 0;
-//		}
-//	}
-//
-//	pManager->airportsArr = ports;
-//
-//	return 1;
-//}
-=======
+
 Airport* readAirportsFromFile(const char * fileName,int* size)
 {
 	int arrSize;
@@ -172,7 +137,6 @@ Airport* readAirportsFromFile(const char * fileName,int* size)
 	*size = arrSize;
 	return arr;
 }
->>>>>>> Stashed changes
 
 void	freeManager(AirportManager* pManager)
 {
