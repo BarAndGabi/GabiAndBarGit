@@ -75,7 +75,7 @@ void printCompany(const Airline* pComp)
 {
 	printf("Airline %s\n", pComp->name);
 	printf("Has %d flights\n", pComp->flightCount);
-	printFlightArr(pComp->flightArr, pComp->flightCount);
+	generalArrayFunction(pComp->flightArr,pComp->flightCount,sizeof(Flight),printFlight);
 	printf("airline DATES :\n");
 	L_print(&pComp->Dates, printDate);
 }
@@ -109,11 +109,6 @@ void	doCountFlightsFromName(const Airline* pComp)
 
 
 
-void	printFlightArr(Flight** pFlight, int size)
-{
-	for (int i = 0; i < size; i++)
-		printFlight(pFlight[i]);
-}
 
 void	doPrintFlightsWithPlaneCode(const Airline* pComp)
 {
