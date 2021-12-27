@@ -168,24 +168,26 @@ int sortFlights(Airline *pComp)
 	}
 	return 0;
 }
-int searchFlight(Airline *pComp, Flight *pF)
+int searchFlight(Airline *pComp)
 {
-	int choise = flightsComparatorMenu();
-	switch (choise)
+	switch (pComp->sortType)
 	{
-	case 1:
-			bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightBySourceName);
+	case notSorted:
+		//bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightBySourceName);
 
 		break;
-	case 2:
-			bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDestName);
+	case sourceName:
+		//	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDestName);
 
 		break;
-	case 3:
-			bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDate);
+	case DestanationName:
+		//		bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDate);
 		break;
-	case 4:
-	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
+	case DateSort:
+		//	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
+		break;
+	case PlainCode:
+		//	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
 		break;
 	default:
 		printf("error");
