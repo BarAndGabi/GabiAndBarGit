@@ -83,11 +83,11 @@ void removeChar(char *str, char charToRemmove)
 		}
 	}
 }
-void generalArrayFunction(const void *arr, int size, int sizeOfElements, void (*f)(const void *))
+void generalArrayFunction(const void *arr, int size, int sizeOfElement, void (*f)(const void *))
 {
 	for (size_t i = 0; i < size; i++)
 	{
-		f(arr + (i * sizeOfElements));
+		f((char*)arr + i * sizeOfElement);
 		NEXT_LINE;
 	}
 }

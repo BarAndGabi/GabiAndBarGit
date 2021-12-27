@@ -27,7 +27,7 @@ int		isFlightFromSourceName(const Flight* pFlight, const char* nameSource)
 {
 	if (strcmp(pFlight->nameSource, nameSource) == 0)
 		return 1;
-		
+
 	return 0;
 }
 
@@ -57,11 +57,12 @@ int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type)
 }
 
 
-void	printFlight(const Flight* pFlight)
+void	printFlight(const void* pFlight)
 {
-	printf("Flight From %s To %s\t",pFlight->nameSource, pFlight->nameDest);
-	printDate(&pFlight->date);
-	printPlane(&pFlight->thePlane);
+	const Flight* pF = (const Flight*)pFlight;
+	printf("Flight From %s To %s\t", pF->nameSource, pF->nameDest);
+	printDate(&pF->date);
+	printPlane(&pF->thePlane);
 }
 
 Airport* setAiportToFlight(const AirportManager* pManager, const char* msg)
@@ -75,7 +76,7 @@ Airport* setAiportToFlight(const AirportManager* pManager, const char* msg)
 		port = findAirportByName(pManager, name);
 		if (port == NULL)
 			printf("No airport with this name - try again\n");
-	} while(port == NULL);
+	} while (port == NULL);
 
 	return port;
 }
@@ -86,23 +87,51 @@ void	freeFlight(Flight* pFlight)
 	free(pFlight->nameDest);
 	free(pFlight);
 }
-int compareFlightBySourceName(Flight * f1,Flight* f2)
+int compareFlightBySourceName(const void * f1, const void* f2)
 {
-	return 0;
+	const Flight* flight1 = (const Flight*)f1;
+	const Flight* flight2 = (const Flight*)f2;
+	if (flight1->nameSource < flight2->nameSource)
+		return -1;
+	else
+		if (flight1->nameSource > flight2->nameSource)
+			return 1;
+		else
+			return 0;
+
 }
-int compareFlightByDestName(Flight * f1,Flight* f2)
+int compareFlightByDestName(const void * f1, const void* f2)
 {
-	return 0;
+	
+		const Flight* flight1 = (const Flight*)f1;
+		const Flight* flight2 = (const Flight*)f2;
+		if (flight1->nameDest < flight2->nameDest)
+			return -1;
+		else
+			if (flight1->nameDest > flight2->nameDest)
+				return 1;
+			else
+				return 0;
+
+	
 }
-int compareFlightByDestName(Flight * f1,Flight* f2)
+
+int compareFlightByPlainCode(const void * f1, const void* f2)
 {
-	return 0;
+	const Flight* flight1 = (const Flight*)f1;
+	const Flight* flight2 = (const Flight*)f2;
+	if (flight1->thePlane.code < flight2->thePlane.code)
+		return -1;
+	else
+		if (flight1->thePlane.code > flight2->thePlane.code)
+			return 1;
+		else
+			return 0;
 }
-int compareFlightByPlainCode(Flight * f1,Flight* f2)
+int compareFlightByDate(const void * f1, const void* f2)
 {
-	return 0;
-}
-int compareFlightByDate(Flight * f1,Flight* f2)
-{
-	return compare_dates(&f1->date,&f2->date);
+	const Flight* flight1 = (const Flight*)f1;
+	const Flight* flight2 = (const Flight*)f2;
+
+	return compare_dates(&flight1->date, &flight2->date);
 }

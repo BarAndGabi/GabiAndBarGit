@@ -54,10 +54,10 @@ void writeToFileAirport(FILE * pF, Airport * pPort)
 int readFromFileAirport(FILE * pF, Airport * pPort)
 {
 	char line[255];
-	char line2[225];
+	char line2[255];
 	if (fgets(line, sizeof(line), pF) == NULL)
 		return 0;
-	pPort->name =_strdup(line);
+	pPort->name = _strdup(line);
 	removeChar(pPort->name, '\n');
 	if (!pPort->name)
 		free(pPort->name);

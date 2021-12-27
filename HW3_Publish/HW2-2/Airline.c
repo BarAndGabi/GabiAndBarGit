@@ -43,21 +43,23 @@ int addDateToList(Airline *pComp, Date *d)
 		L_insert(runner, d);
 		return 1;
 	}
-	else if (compare_dates(runner->next->key, d) == 1)
-	{
-		L_insert(runner, d);
-		return 1;
-	}
-	runner = runner->next;
-	while (runner->next != NULL)
-	{
-
-		if (isBetweenOrEqualToFirst(runner->key, runner->next->key, d))
+	else {
+		if (compare_dates(runner->next->key, d) == 1)
 		{
-			L_insert(runner->next, d);
+			L_insert(runner, d);
 			return 1;
 		}
 		runner = runner->next;
+		while (runner->next != NULL)
+		{
+
+			if (isBetweenOrEqualToFirst(runner->key, runner->next->key, d) == 1)
+			{
+				L_insert(runner->next, d);
+				return 1;
+			}
+			runner = runner->next;
+		}
 	}
 	L_insert(runner, d);
 
@@ -66,6 +68,7 @@ int addDateToList(Airline *pComp, Date *d)
 int readAirlineFromFile(char *fileName, Airline *a)
 {
 	FILE *airline = fopen(fileName, "rb");
+	//a->flightCount=fscanf(airline,)
 	fclose(airline);
 	return 0;
 }
@@ -73,9 +76,16 @@ void printCompany(const Airline *pComp)
 {
 	printf("Airline %s\n", pComp->name);
 	printf("Has %d flights\n", pComp->flightCount);
-	generalArrayFunction(pComp->flightArr, pComp->flightCount, sizeof(Flight), printFlight);
+	//generalArrayFunction(pComp->flightArr, pComp->flightCount, sizeof(Flight*), printFlight);
+	printFlightArr(pComp->flightArr, pComp->flightCount);
 	printf("airline DATES :\n");
 	L_print(&pComp->Dates, printDate);
+}
+
+void	printFlightArr(Flight** pFlight, int size)
+{
+	for (int i = 0; i < size; i++)
+		printFlight(pFlight[i]);
 }
 
 void doCountFlightsFromName(const Airline *pComp)
@@ -151,22 +161,23 @@ int sortFlights(Airline *pComp)
 	switch (choise)
 	{
 	case 1:
-		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightBySourceName);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t) sizeof(Flight*), compareFlightBySourceName);
 		break;
 	case 2:
-		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDestName);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t) sizeof(Flight*), compareFlightByDestName);
 		break;
 	case 3:
-		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDate);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t) sizeof(Flight*), compareFlightByDate);
 		break;
 	case 4:
-		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t) sizeof(Flight*), compareFlightByPlainCode);
 		break;
 	default:
 		printf("error");
-		break;
+		return 0;
 	}
-	return 0;
+	printf("sorted\n");
+	return 1;
 }
 int searchFlight(Airline *pComp)
 {
@@ -202,12 +213,8 @@ int flightsComparatorMenu()
 	while (!(choise > 0 && choise < 5))
 	{
 		printf("choose on of the following to search/sory by :\n");
-		printEnumOptions();
-		scanf("%d", choise);
+		printf("1) for sourceName\n2) for DestanationName\n3) for DateSort\n4) for PlainCode\n");
+		scanf("%d", &choise);
 	}
 	return choise;
-}
-void printEnumOptions()
-{
-	printf("1) for sourceName\n2) for DestanationName\n3) for DateSort\n4) for PlainCode\n");
 }
