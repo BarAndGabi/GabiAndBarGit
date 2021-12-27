@@ -6,7 +6,7 @@
 #include "AirportManager.h"
 #include "General.h"
 
-int	initManager(AirportManager* pManager)
+int initManager(AirportManager *pManager)
 {
 	printf("-----------  Init airport Manager\n");
 	pManager->airportsCount = 0;
@@ -16,7 +16,8 @@ int	initManager(AirportManager* pManager)
 	while (1)
 	{
 		printf("Do you want to enter an airport? y/Y, anything else to exit!!\t");
-		do {
+		do
+		{
 			scanf("%c", &op);
 		} while (isspace(op));
 		getchar(); //clean the enter
@@ -29,19 +30,19 @@ int	initManager(AirportManager* pManager)
 	return 1;
 }
 
-int	addAirport(AirportManager* pManager)
+int addAirport(AirportManager *pManager)
 {
-	pManager->airportsArr = (Airport*)realloc(pManager->airportsArr, (pManager->airportsCount + 1) * sizeof(Airport));
+	pManager->airportsArr = (Airport *)realloc(pManager->airportsArr, (pManager->airportsCount + 1) * sizeof(Airport));
 	if (!pManager->airportsArr)
 		return 0;
 
 	initAirport(&pManager->airportsArr[pManager->airportsCount], pManager);
-	
+
 	pManager->airportsCount++;
 	return 1;
 }
 
-void  initAirport(Airport* pPort, AirportManager* pManager)
+void initAirport(Airport *pPort, AirportManager *pManager)
 {
 	while (1)
 	{
@@ -57,7 +58,7 @@ void  initAirport(Airport* pPort, AirportManager* pManager)
 	initAirportNoName(pPort);
 }
 
-Airport* findAirportByName(const AirportManager* pManager, const char* name)
+Airport *findAirportByName(const AirportManager *pManager, const char *name)
 {
 	for (int i = 0; i < pManager->airportsCount; i++)
 	{
@@ -67,9 +68,9 @@ Airport* findAirportByName(const AirportManager* pManager, const char* name)
 	return NULL;
 }
 
-int checkUniqeName(const char* name,const AirportManager* pManager)
+int checkUniqeName(const char *name, const AirportManager *pManager)
 {
-	Airport* port = findAirportByName(pManager, name);
+	Airport *port = findAirportByName(pManager, name);
 
 	if (port != NULL)
 		return 0;
@@ -77,23 +78,19 @@ int checkUniqeName(const char* name,const AirportManager* pManager)
 	return 1;
 }
 
-void	printAirports(const AirportManager* pManager)
+void printAirports(const AirportManager *pManager)
 {
 	printf("there are %d airports\n", pManager->airportsCount);
-	for (int i = 0; i < pManager->airportsCount; i++)
-	{
-		printAirport(&pManager->airportsArr[i]);
-		printf("\n");
-	}
+	generalArrayFunction(pManager->airportsArr, pManager->airportsCount, sizeof(Airport), printAirport);
 }
 
-void writeAirportsToFile(const char * fileName, AirportManager * pManager)
+void writeAirportsToFile(const char *fileName, AirportManager *pManager)
 {
-	FILE* pF = fopen(fileName, "w");
+	FILE *pF = fopen(fileName, "w");
 	if (!pF)
 		printf("There isnt a file to read from");
-    
-	fprintf(pF, "%d\n",pManager->airportsCount);
+
+	fprintf(pF, "%d\n", pManager->airportsCount);
 
 	for (size_t i = 0; i < pManager->airportsCount; i++)
 		writeToFileAirport(pF, &pManager->airportsArr[i]);
@@ -101,10 +98,9 @@ void writeAirportsToFile(const char * fileName, AirportManager * pManager)
 	fclose(pF);
 }
 
-
-int readAirportsFromFile(const char * fileName,AirportManager* pManager)
+int readAirportsFromFile(const char *fileName, AirportManager *pManager)
 {
-	FILE* pF = fopen(fileName, "r");
+	FILE *pF = fopen(fileName, "r");
 	if (!pF)
 		return 0;
 	if (fscanf(pF, "%d ", &pManager->airportsCount) != 1)
@@ -113,8 +109,8 @@ int readAirportsFromFile(const char * fileName,AirportManager* pManager)
 		return 0;
 	}
 
-	pManager->airportsArr = (Airport*)malloc(sizeof(Airport)*(pManager->airportsCount));
-	if(!pManager->airportsArr)
+	pManager->airportsArr = (Airport *)malloc(sizeof(Airport) * (pManager->airportsCount));
+	if (!pManager->airportsArr)
 	{
 		free(pManager->airportsArr);
 		fclose(pF);
@@ -122,31 +118,29 @@ int readAirportsFromFile(const char * fileName,AirportManager* pManager)
 	}
 	for (size_t i = 0; i < pManager->airportsCount; i++)
 	{
-		if (!readFromFileAirport(pF,&pManager->airportsArr[i])) 
+		if (!readFromFileAirport(pF, &pManager->airportsArr[i]))
 		{
 			//freeAirportsArr(&pManager->airportsArr, pManager->airportsCount);
 			//free(pManager->airportsArr);
 			fclose(pF);
 			return 0;
 		}
-
 	}
 	fclose(pF);
 	return 1;
 }
 
-void	freeManager(AirportManager* pManager)
+void freeManager(AirportManager *pManager)
 {
 	for (int i = 0; i < pManager->airportsCount; i++)
 		freeAirport(&pManager->airportsArr[i]);
-	    free(pManager->airportsArr);
+	free(pManager->airportsArr);
 }
 
-void freeAirportsArr(Airport * ports,int size)
+void freeAirportsArr(Airport *ports, int size)
 {
 	for (size_t i = 0; i < size; i++)
 	{
 		free(&ports[i]);
 	}
 }
-

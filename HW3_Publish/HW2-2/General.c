@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "General.h"
+#include "def.h"
 
 char *getStrExactName(const char *msg)
 {
@@ -87,5 +88,6 @@ void generalArrayFunction(const void *arr, int size, int sizeOfElements, void (*
 	for (size_t i = 0; i < size; i++)
 	{
 		f(arr + (i * sizeOfElements));
+		NEXT_LINE;
 	}
 }

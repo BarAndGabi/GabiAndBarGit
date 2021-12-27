@@ -6,7 +6,7 @@
 #include "Airport.h"
 #include "General.h"
 
-void	initAirline(Airline* pComp)
+void initAirline(Airline *pComp)
 {
 	printf("-----------  Init Airline Airline\n");
 	pComp->name = getStrExactName("Enter Airline name");
@@ -16,17 +16,17 @@ void	initAirline(Airline* pComp)
 	pComp->sortType = notSorted;
 }
 
-int	addFlight(Airline* pComp, const AirportManager* pManager)
+int addFlight(Airline *pComp, const AirportManager *pManager)
 {
 	if (pManager->airportsCount < 2)
 	{
 		printf("There are not enough airport to set a flight\n");
 		return 0;
 	}
-	pComp->flightArr = (Flight**)realloc(pComp->flightArr, (pComp->flightCount + 1) * sizeof(Flight*));
+	pComp->flightArr = (Flight **)realloc(pComp->flightArr, (pComp->flightCount + 1) * sizeof(Flight *));
 	if (!pComp->flightArr)
 		return 0;
-	pComp->flightArr[pComp->flightCount] = (Flight*)calloc(1, sizeof(Flight));
+	pComp->flightArr[pComp->flightCount] = (Flight *)calloc(1, sizeof(Flight));
 	if (!pComp->flightArr[pComp->flightCount])
 		return 0;
 	initFlight(pComp->flightArr[pComp->flightCount], pManager);
@@ -35,52 +35,50 @@ int	addFlight(Airline* pComp, const AirportManager* pManager)
 	pComp->flightCount++;
 	return 1;
 }
-int addDateToList(Airline * pComp, Date* d)
+int addDateToList(Airline *pComp, Date *d)
 {
-	NODE* runner = &pComp->Dates.head;
+	NODE *runner = &pComp->Dates.head;
 	if (runner->next == NULL)
 	{
 		L_insert(runner, d);
 		return 1;
 	}
-	else
-		if (compare_dates(runner->next->key, d) == 1)
-		{
-			L_insert(runner, d);
-			return 1;
-		}
+	else if (compare_dates(runner->next->key, d) == 1)
+	{
+		L_insert(runner, d);
+		return 1;
+	}
 	runner = runner->next;
 	while (runner->next != NULL)
 	{
-		
-			if (isBetweenOrEqualToFirst(runner->key, runner->next->key, d))
-			{
-				L_insert(runner->next, d);
-				return 1;
-			}
-			runner = runner->next;
-		
+
+		if (isBetweenOrEqualToFirst(runner->key, runner->next->key, d))
+		{
+			L_insert(runner->next, d);
+			return 1;
+		}
+		runner = runner->next;
 	}
 	L_insert(runner, d);
 
 	return 1;
 }
-int readAirlineFromFile(char * fileName, Airline * a)
+int readAirlineFromFile(char *fileName, Airline *a)
 {
-	FILE * airline =fopen(fileName, "rb");
+	FILE *airline = fopen(fileName, "rb");
 	fclose(airline);
 	return 0;
 }
-void printCompany(const Airline* pComp)
+void printCompany(const Airline *pComp)
 {
 	printf("Airline %s\n", pComp->name);
 	printf("Has %d flights\n", pComp->flightCount);
-	generalArrayFunction(pComp->flightArr,pComp->flightCount,sizeof(Flight),printFlight);
+	generalArrayFunction(pComp->flightArr, pComp->flightCount, sizeof(Flight), printFlight);
 	printf("airline DATES :\n");
 	L_print(&pComp->Dates, printDate);
 }
 
-void	doCountFlightsFromName(const Airline* pComp)
+void doCountFlightsFromName(const Airline *pComp)
 {
 	if (pComp->flightCount == 0)
 	{
@@ -88,7 +86,7 @@ void	doCountFlightsFromName(const Airline* pComp)
 		return;
 	}
 
-	char* tempName = getStrExactName("Please enter origin airport name");
+	char *tempName = getStrExactName("Please enter origin airport name");
 
 	int count = 0;
 	for (int i = 0; i < pComp->flightCount; i++)
@@ -107,10 +105,7 @@ void	doCountFlightsFromName(const Airline* pComp)
 	printf("flights from this airport\n");
 }
 
-
-
-
-void	doPrintFlightsWithPlaneCode(const Airline* pComp)
+void doPrintFlightsWithPlaneCode(const Airline *pComp)
 {
 	char code[MAX_STR_LEN];
 	getPlaneCode(code);
@@ -121,10 +116,9 @@ void	doPrintFlightsWithPlaneCode(const Airline* pComp)
 			printFlight(pComp->flightArr[i]);
 	}
 	printf("\n");
-
 }
 
-void	doPrintFlightsWithPlaneType(const Airline* pComp)
+void doPrintFlightsWithPlaneType(const Airline *pComp)
 {
 	ePlaneType type = getPlaneType();
 	printf("All flights with plane type %s:\n", PlaneTypeStr[type]);
@@ -136,7 +130,7 @@ void	doPrintFlightsWithPlaneType(const Airline* pComp)
 	printf("\n");
 }
 
-void	freeFlightArr(Flight** arr, int size)
+void freeFlightArr(Flight **arr, int size)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -144,7 +138,7 @@ void	freeFlightArr(Flight** arr, int size)
 	}
 }
 
-void	freeCompany(Airline* pComp)
+void freeCompany(Airline *pComp)
 {
 	freeFlightArr(pComp->flightArr, pComp->flightCount);
 	free(pComp->flightArr);

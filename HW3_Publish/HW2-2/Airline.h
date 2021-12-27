@@ -5,33 +5,35 @@
 #include "AirportManager.h"
 #include "list.h"
 
-typedef enum {
-	notSorted,sourceName,DestanationName,DateSort,PlainCode
+typedef enum
+{
+	notSorted,
+	sourceName,
+	DestanationName,
+	DateSort,
+	PlainCode
 } SortedType;
 
 typedef struct
 {
-	char*		name;
-	int			flightCount;
-	Flight**	flightArr;
-	LIST  Dates;
+	char *name;
+	int flightCount;
+	Flight **flightArr;
+	LIST Dates;
 	SortedType sortType;
 
-	 
-}Airline;
+} Airline;
 
-void	initAirline(Airline* pComp);
-int		addFlight(Airline* pComp,const AirportManager* pManager);
-void	printCompany(const Airline* pComp);
-void	printFlightArr(Flight** pFlight, int size);
-void	doCountFlightsFromName(const Airline* pComp);
-void	doPrintFlightsWithPlaneCode(const Airline* pComp);
-void	doPrintFlightsWithPlaneType(const Airline* pComp);
-void	freeFlightArr(Flight** arr, int size);
-void	freeCompany(Airline* pComp);
-int		addDateToList(Airline* pComp,Date * d);
-int readAirlineFromFile(char* fileName, Airline* a);
-
+void initAirline(Airline *pComp);
+int addFlight(Airline *pComp, const AirportManager *pManager);
+void printCompany(const Airline *pComp);
+void printFlightArr(Flight **pFlight, int size);
+void doCountFlightsFromName(const Airline *pComp);
+void doPrintFlightsWithPlaneCode(const Airline *pComp);
+void doPrintFlightsWithPlaneType(const Airline *pComp);
+void freeFlightArr(Flight **arr, int size);
+void freeCompany(Airline *pComp);
+int addDateToList(Airline *pComp, Date *d);
+int readAirlineFromFile(char *fileName, Airline *a);
 
 #endif
-
