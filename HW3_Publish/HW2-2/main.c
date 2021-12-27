@@ -6,40 +6,46 @@
 #define TEXT_FILE "airport_authority.txt"
 #define BIN_FILE "airline.bin"
 
-
-typedef enum 
-{ 
-	eAddFlight, eAddAirport, ePrintCompany, ePrintAirports,
-	ePrintNumFlightsOrig, ePrintFlightsPlaneCode, ePrintFlightsPlaneType, eNofOptions
+typedef enum
+{
+	eAddFlight,
+	eAddAirport,
+	ePrintCompany,
+	ePrintAirports,
+	ePrintNumFlightsOrig,
+	ePrintFlightsPlaneCode,
+	ePrintFlightsPlaneType,
+	eSortFlights,
+	eSearchFlight,
+	eNofOptions
 } eMenuOptions;
 
-const char* str[eNofOptions] = { "Add Flight", "Add Airport",
+const char *str[eNofOptions] = {"Add Flight", "Add Airport",
 								"Print Airline", "Print all Airports",
 								"Print number of flights from origin airport name",
 								"Print all flights with plane code",
-								"Print all flights with plane type" };
+								"Print all flights with plane type", "Sort flights", "Search flight"};
 
-#define EXIT			-1
+#define EXIT -1
 int menu();
 
 int main()
 {
-	AirportManager	manager;
-	Airline			company;
-	
+	AirportManager manager;
+	Airline company;
+
 	if (!readAirportsFromFile(TEXT_FILE, &manager))
 		initManager(&manager);
 	else
 		printf("sucsses manager from file\n");
-	if(!readAirlineFromFile(BIN_FILE,&company))
-	initAirline(&company);
+	if (!readAirlineFromFile(BIN_FILE, &company))
+		initAirline(&company);
 	else
 		printf("sucsses airline from file\n");
 
-	
 	int option;
 	int stop = 0;
-	
+
 	do
 	{
 		option = menu();
@@ -49,7 +55,6 @@ int main()
 			if (!addFlight(&company, &manager))
 				printf("Error adding flight\n");
 			break;
-
 
 		case eAddAirport:
 			if (!addAirport(&manager))
@@ -76,6 +81,11 @@ int main()
 			doPrintFlightsWithPlaneType(&company);
 			break;
 
+		case eSortFlights:
+			sortFlights(&company);
+			break;
+		case eSearchFlight:
+			break;
 		case EXIT:
 			printf("Bye bye\n");
 			writeAirportsToFile(TEXT_FILE, &manager);
@@ -98,8 +108,8 @@ int menu()
 	int option;
 	printf("\n\n");
 	printf("Please choose one of the following options\n");
-	for(int i = 0 ; i < eNofOptions ; i++)
-		printf("%d - %s\n",i,str[i]);
+	for (int i = 0; i < eNofOptions; i++)
+		printf("%d - %s\n", i, str[i]);
 	printf("%d - Quit\n", EXIT);
 	scanf("%d", &option);
 	//clean buffer
