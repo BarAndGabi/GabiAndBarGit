@@ -13,6 +13,7 @@ void	initAirline(Airline* pComp)
 	pComp->flightArr = NULL;
 	pComp->flightCount = 0;
 	L_init(&pComp->Dates);
+	pComp->sortType = notSorted;
 }
 
 int	addFlight(Airline* pComp, const AirportManager* pManager)
@@ -64,11 +65,18 @@ int addDateToList(Airline * pComp, Date* d)
 
 	return 1;
 }
+int readAirlineFromFile(char * fileName, Airline * a)
+{
+	FILE * airline =fopen(fileName, "rb");
+	fclose(airline);
+	return 0;
+}
 void printCompany(const Airline* pComp)
 {
 	printf("Airline %s\n", pComp->name);
 	printf("Has %d flights\n", pComp->flightCount);
 	printFlightArr(pComp->flightArr, pComp->flightCount);
+	printf("airline DATES :\n");
 	L_print(&pComp->Dates, printDate);
 }
 

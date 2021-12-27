@@ -106,11 +106,11 @@ int readAirportsFromFile(const char * fileName,AirportManager* pManager)
 {
 	FILE* pF = fopen(fileName, "r");
 	if (!pF)
-		return NULL;
+		return 0;
 	if (fscanf(pF, "%d ", &pManager->airportsCount) != 1)
 	{
 		fclose(pF);
-		return NULL;
+		return 0;
 	}
 
 	pManager->airportsArr = (Airport*)malloc(sizeof(Airport)*(pManager->airportsCount));

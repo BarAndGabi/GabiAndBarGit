@@ -87,3 +87,7 @@ void removeChar(char * str, char charToRemmove)
 	}
 
 }
+void generalArrayFunction(void * arr[], int size, int sizeOfElements, void f(void* element))
+{
+
+}
