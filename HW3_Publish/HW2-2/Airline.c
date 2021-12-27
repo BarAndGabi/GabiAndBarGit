@@ -148,6 +148,24 @@ void freeCompany(Airline *pComp)
 int sortFlights(Airline *pComp)
 {
 	int choise = flightsComparatorMenu();
+	switch (choise)
+	{
+	case 1:
+		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightBySourceName);
+		break;
+	case 2:
+		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDestName);
+		break;
+	case 3:
+		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDate);
+		break;
+	case 4:
+		qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
+		break;
+	default:
+		printf("error");
+		break;
+	}
 	return 0;
 }
 int searchFlights(Airline *pComp, Flight *pF)

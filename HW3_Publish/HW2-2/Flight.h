@@ -7,21 +7,25 @@
 
 typedef struct
 {
-	char*		nameSource;
-	char*		nameDest;
-	Plane		thePlane;
-	Date		date;
-}Flight;
+	char *nameSource;
+	char *nameDest;
+	Plane thePlane;
+	Date date;
+} Flight;
 
-void	initFlight(Flight* pFlight,const AirportManager* pManager);
-int		isFlightFromSourceName(const Flight* pFlight, const char* nameSource);
-int		isFlightToDestName(const Flight* pFlight, const char* nameDest);
-void	printFlight(const Flight* pFlight);
-Airport*	setAiportToFlight(const AirportManager* pManager, const char* msg);
-int		isPlaneCodeInFlight(const Flight* pFlight, const char*  code);
-int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type);
-void	freeFlight(Flight* pFlight);
-int     writeStudentToBFile(FILE* pFile, Flight* pF);
-int     readStudentFromFile(FILE* pFile, Flight* pF);
+void initFlight(Flight *pFlight, const AirportManager *pManager);
+int isFlightFromSourceName(const Flight *pFlight, const char *nameSource);
+int isFlightToDestName(const Flight *pFlight, const char *nameDest);
+void printFlight(const Flight *pFlight);
+Airport *setAiportToFlight(const AirportManager *pManager, const char *msg);
+int isPlaneCodeInFlight(const Flight *pFlight, const char *code);
+int isPlaneTypeInFlight(const Flight *pFlight, ePlaneType type);
+void freeFlight(Flight *pFlight);
+int writeStudentToBFile(FILE *pFile, Flight *pF);
+int readStudentFromFile(FILE *pFile, Flight *pF);
+int compareFlightBySourceName(Flight *f1, Flight *f2);
+int compareFlightByDestName(Flight *f1, Flight *f2);
+int compareFlightByPlainCode(Flight *f1, Flight *f2);
+int compareFlightByDate(Flight * f1,Flight* f2);
 
 #endif

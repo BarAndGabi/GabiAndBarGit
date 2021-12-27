@@ -86,4 +86,23 @@ void	freeFlight(Flight* pFlight)
 	free(pFlight->nameDest);
 	free(pFlight);
 }
-
+int compareFlightBySourceName(Flight * f1,Flight* f2)
+{
+	return 0;
+}
+int compareFlightByDestName(Flight * f1,Flight* f2)
+{
+	return 0;
+}
+int compareFlightByDestName(Flight * f1,Flight* f2)
+{
+	return 0;
+}
+int compareFlightByPlainCode(Flight * f1,Flight* f2)
+{
+	return 0;
+}
+int compareFlightByDate(Flight * f1,Flight* f2)
+{
+	return compare_dates(&f1->date,&f2->date);
+}
