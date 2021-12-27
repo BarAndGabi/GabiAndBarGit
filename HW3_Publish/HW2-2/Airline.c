@@ -174,12 +174,18 @@ int searchFlights(Airline *pComp, Flight *pF)
 	switch (choise)
 	{
 	case 1:
+			bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightBySourceName);
+
 		break;
 	case 2:
+			bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDestName);
+
 		break;
 	case 3:
+			bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDate);
 		break;
 	case 4:
+	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
 		break;
 	default:
 		printf("error");
