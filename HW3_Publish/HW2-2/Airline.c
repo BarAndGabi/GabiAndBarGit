@@ -153,10 +153,35 @@ int sortFlights(Airline *pComp)
 int searchFlights(Airline *pComp, Flight *pF)
 {
 	int choise = flightsComparatorMenu();
+	switch (choise)
+	{
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	default:
+		printf("error");
+		break;
+	}
 	return 0;
 }
 int flightsComparatorMenu()
 {
 	int choise = 0;
+
+	while (!(choise > 0 && choise < 5))
+	{
+		printf("choose on of the following to search/sory by :\n");
+		printEnumOptions();
+		scanf("%d", choise);
+	}
 	return choise;
+}
+void printEnumOptions()
+{
+	printf("1) for sourceName\n2) for DestanationName\n3) for DateSort\n4) for PlainCode\n");
 }
