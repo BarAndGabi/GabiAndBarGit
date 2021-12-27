@@ -168,7 +168,7 @@ int sortFlights(Airline *pComp)
 	}
 	return 0;
 }
-int searchFlights(Airline *pComp, Flight *pF)
+int searchFlight(Airline *pComp, Flight *pF)
 {
 	int choise = flightsComparatorMenu();
 	switch (choise)
