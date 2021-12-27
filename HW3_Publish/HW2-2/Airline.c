@@ -145,3 +145,18 @@ void freeCompany(Airline *pComp)
 	free(pComp->name);
 	L_free(&pComp->Dates, NULL);
 }
+int sortFlights(Airline *pComp)
+{
+	int choise = flightsComparatorMenu();
+	return 0;
+}
+int searchFlights(Airline *pComp, Flight *pF)
+{
+	int choise = flightsComparatorMenu();
+	return 0;
+}
+int flightsComparatorMenu()
+{
+	int choise = 0;
+	return choise;
+}
