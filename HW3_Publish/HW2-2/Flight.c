@@ -23,6 +23,9 @@ void	initFlight(Flight* pFlight, const AirportManager* pManager)
 	getCorrectDate(&pFlight->date);
 }
 
+
+
+
 int		isFlightFromSourceName(const Flight* pFlight, const char* nameSource)
 {
 	if (strcmp(pFlight->nameSource, nameSource) == 0)
@@ -57,9 +60,9 @@ int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type)
 }
 
 
-void	printFlight(const void* pFlight)
+void	printFlight(const void** pFlight)
 {
-	const Flight* pF = (const Flight*)pFlight;
+	const Flight* pF = *(const Flight**)pFlight;
 	printf("Flight From %s To %s\t",pF->nameSource,pF->nameDest);
 	printDate(&pF->date);
 	printPlane(&pF->thePlane);

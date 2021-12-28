@@ -117,6 +117,7 @@
     <ClInclude Include="AirportManager.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="Flight.h" />
+    <ClInclude Include="flightComperators.h" />
     <ClInclude Include="General.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="list.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="AirportManager.c" />
     <ClCompile Include="Date.c" />
     <ClCompile Include="Flight.c" />
+    <ClCompile Include="flightComperators.c" />
     <ClCompile Include="General.c" />
     <ClCompile Include="list.c" />
     <ClCompile Include="main.c" />

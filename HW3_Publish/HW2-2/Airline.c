@@ -114,6 +114,7 @@ int readAirlineFromFile(char *fileName, Airline *a)
 			readFlightFromFile(f, a->flightArr[i]);
 		}
 	getDatesFrommArr(a);
+	a->sortType = 0;
 
 	fclose(f);
 	return 1;
@@ -123,17 +124,12 @@ void printCompany(const Airline *pComp)
 {
 	printf("Airline %s\n", pComp->name);
 	printf("Has %d flights\n", pComp->flightCount);
-	//generalArrayFunction(pComp->flightArr, pComp->flightCount, sizeof(Flight*), printFlight);
-	printFlightArr(pComp->flightArr, pComp->flightCount);
+	generalArrayFunction(pComp->flightArr, pComp->flightCount, sizeof(Flight*), printFlight);
 	printf("airline DATES :\n");
 	L_print(&pComp->Dates, printDate);
 }
 
-void printFlightArr(Flight **pFlight, int size)
-{
-	for (int i = 0; i < size; i++)
-		printFlight(pFlight[i]);
-}
+
 
 void doCountFlightsFromName(const Airline *pComp)
 {
@@ -208,16 +204,21 @@ int sortFlights(Airline *pComp)
 	switch (choise)
 	{
 	case 1:
-		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t)sizeof(Flight *), compareFlightBySourceName);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, sizeof(Flight *), compareFlightBySourceName);
+		pComp->sortType = 1;
 		break;
 	case 2:
-		qsort(&pComp->flightArr, (size_t)pComp->flightCount, (size_t)sizeof(Flight *), compareFlightByDestName);
+		qsort(pComp->flightArr,pComp->flightCount, (size_t)sizeof(Flight *), compareFlightByDestName);
+		pComp->sortType = 2;
 		break;
 	case 3:
-		qsort(&pComp->flightArr, (size_t)pComp->flightCount, (size_t)sizeof(Flight *), compareFlightByDate);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t)sizeof(Flight *), compareFlightByDate);
+		pComp->sortType = 3;
 		break;
 	case 4:
-		qsort(&pComp->flightArr, (size_t)pComp->flightCount, (size_t)sizeof(Flight *), compareFlightByPlainCode);
+		qsort(pComp->flightArr, (size_t)pComp->flightCount, (size_t)sizeof(Flight *), compareFlightByPlainCode);
+		pComp->sortType = 4;
+
 		break;
 	default:
 		printf("error");
@@ -226,31 +227,45 @@ int sortFlights(Airline *pComp)
 	printf("sorted\n");
 	return 1;
 }
-int searchFlight(Airline *pComp)
+int searchFlight(Airline *pComp/*AirportManager* m*/)
 {
+	Flight *temp=(Flight *)calloc(1, sizeof(Flight));
+	if (!temp)
+		return 0;
 	switch (pComp->sortType)
 	{
 	case notSorted:
-		//bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightBySourceName);
-
+		printf("array not sotred\n");
+		temp = NULL;
 		break;
 	case sourceName:
-		//	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDestName);
-
+		temp->nameSource = getStrExactName("enter the airport source name you are searching :");
+		temp=(bsearch(&temp->nameSource,pComp->flightArr, pComp->flightCount, sizeof(Flight*), compareFlightBySourceName));
 		break;
 	case DestanationName:
-		//		bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByDate);
+		temp->nameDest = getStrExactName("enter the airport destenation name you are searching :");
+		temp =bsearch(&temp, pComp->flightArr, pComp->flightCount, sizeof(Flight*), compareFlightByDestName);
 		break;
 	case DateSort:
-		//	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
+		getCorrectDate(&temp->date);
+		temp = bsearch(&temp, pComp->flightArr, pComp->flightCount, sizeof(Flight*), compareFlightByDate);
 		break;
 	case PlainCode:
-		//	bsearch(pF,pComp->flightArr, pComp->flightCount, sizeof(Flight), compareFlightByPlainCode);
+		temp->thePlane = *(Plane*)calloc(1, sizeof(Plane));
+		*temp->thePlane.code = getStrExactName("enter the plain code you are searching :");
+		temp = bsearch(&temp, pComp->flightArr, pComp->flightCount, sizeof(Flight*), compareFlightByPlainCode);
 		break;
 	default:
 		printf("error");
 		break;
 	}
+	if (temp != NULL)
+	{
+		printFlight(temp);
+
+	}
+	else
+		printf("not found\n");
 	return 0;
 }
 int flightsComparatorMenu()

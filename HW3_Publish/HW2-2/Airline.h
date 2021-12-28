@@ -27,7 +27,6 @@ typedef struct
 void initAirline(Airline *pComp);
 int addFlight(Airline *pComp, const AirportManager *pManager);
 void printCompany(const Airline *pComp);
-void printFlightArr(Flight **pFlight, int size);
 void doCountFlightsFromName(const Airline *pComp);
 void doPrintFlightsWithPlaneCode(const Airline *pComp);
 void doPrintFlightsWithPlaneType(const Airline *pComp);
@@ -36,6 +35,6 @@ void freeCompany(Airline *pComp);
 int addDateToList(Airline *pComp, Date *d);
 int readAirlineFromFile(char *fileName, Airline *a);
 int sortFlights(Airline *pComp);
-int searchFlight(Airline *pComp);
+int searchFlight(Airline *pComp, AirportManager* m);
 int flightsComparatorMenu();
 #endif
