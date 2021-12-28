@@ -69,7 +69,7 @@ int compare_dates(const Date *d1, const Date *d2)
 		else
 			return 0;
 	}
-	return -2;
+	return 0;
 }
 
 int isBetweenOrEqualToFirst(const Date *d1,const  Date *d2,const  Date *x)

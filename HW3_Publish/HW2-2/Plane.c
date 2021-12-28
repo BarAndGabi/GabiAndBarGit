@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "General.h"
@@ -61,3 +62,24 @@ void	printPlane(const Plane* pPlane)
 	printf("Plane: type %s, code %s\n", PlaneTypeStr[pPlane->type], pPlane->code);
 
 }
+//Plane* readPlaneFromFile(FILE* f)
+//{
+//	Plane temp = (Plane* )malloc(sizeof(Plane));
+//	if (fread(temp.type, sizeof(int), 1, f) != 1)
+//	{
+//		return NULL ;
+//	}
+//	int len;
+//	if (fread(&len, sizeof(int), 1, f) != 1)
+//		return 0;
+//	temp.code = (char*)malloc(len * sizeof(char));
+//	if (!temp->code)
+//		return 0;
+//	if (fread(temp->code, sizeof(char), len, f) != len)
+//	{
+//		free(temp->code);
+//		return 0;
+//	}
+//	return &temp;
+//}
+

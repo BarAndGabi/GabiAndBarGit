@@ -19,4 +19,4 @@ void		initPlane(Plane* pPlane);
 ePlaneType	getPlaneType();
 void		getPlaneCode(char* code);
 void		printPlane(const Plane* pPlane);
-
+//Plane* readPlaneFromFile(FILE* f);

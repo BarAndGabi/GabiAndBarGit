@@ -35,13 +35,21 @@ int main()
 	Airline company;
 
 	if (!readAirportsFromFile(TEXT_FILE, &manager))
+	{
 		initManager(&manager);
-	else
-		printf("sucsses manager from file\n");
-	if (!readAirlineFromFile(BIN_FILE, &company))
 		initAirline(&company);
+	}
 	else
-		printf("sucsses airline from file\n");
+	{
+		printf("sucsses manager from file\n");
+		if (!readAirlineFromFile(BIN_FILE, &company))
+		{
+			printf("there is no airline binary file to read or there is an error with the file\n");
+			initAirline(&company);
+		}
+		else
+			printf("sucsses airline from file\n");
+	}
 
 	int option;
 	int stop = 0;
