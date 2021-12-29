@@ -5,8 +5,8 @@
 #include "General.h"
 #include "Plane.h"
 
-static const char* PlaneTypeStr[eNofPlaneTypes]
-		= { "Commercial", "Cargo", "Military" };
+static const char* PlaneTypeStr[]
+		= {[eCommercial]= "Commercial",[eCargo]= "Cargo", [eMilitary]="Military" };
 
 void initPlane(Plane* pPlane)
 {

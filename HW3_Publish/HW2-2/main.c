@@ -93,7 +93,7 @@ int main()
 			sortFlights(&company);
 			break;
 		case eSearchFlight:
-			searchFlight(&company, &manager);
+			searchFlight(&company);
 			break;
 		case EXIT:
 			printf("Bye bye\n");

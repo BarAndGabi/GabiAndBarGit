@@ -22,5 +22,5 @@ Airport *setAiportToFlight(const AirportManager *pManager, const char *msg);
 int isPlaneCodeInFlight(const Flight *pFlight, const char *code);
 int isPlaneTypeInFlight(const Flight *pFlight, ePlaneType type);
 void freeFlight(Flight *pFlight);
-
+void	printFlight(const void** pFlight);
 #endif
