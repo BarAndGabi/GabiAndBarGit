@@ -17,10 +17,11 @@ typedef struct
 void initFlight(Flight *pFlight, const AirportManager *pManager);
 int isFlightFromSourceName(const Flight *pFlight, const char *nameSource);
 int isFlightToDestName(const Flight *pFlight, const char *nameDest);
-readFlightFromFile(FILE *f, Flight * flightArr);
+int readFlightFromFile(FILE *f, Flight *flightArr);
+int writeFlightToFile(FILE *f, Flight *flightArr);
 Airport *setAiportToFlight(const AirportManager *pManager, const char *msg);
 int isPlaneCodeInFlight(const Flight *pFlight, const char *code);
 int isPlaneTypeInFlight(const Flight *pFlight, ePlaneType type);
 void freeFlight(Flight *pFlight);
-void	printFlight(const void** pFlight);
+void printFlight(const void **pFlight);
 #endif

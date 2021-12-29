@@ -5,14 +5,14 @@
 #include "Flight.h"
 #include "General.h"
 
-
-void	initFlight(Flight* pFlight, const AirportManager* pManager)
+void initFlight(Flight *pFlight, const AirportManager *pManager)
 {
-	Airport* pPortOr = setAiportToFlight(pManager, "Enter name of origin airport:");
+	Airport *pPortOr = setAiportToFlight(pManager, "Enter name of origin airport:");
 	pFlight->nameSource = _strdup(pPortOr->name);
 	int same;
-	Airport* pPortDes;
-	do {
+	Airport *pPortDes;
+	do
+	{
 		pPortDes = setAiportToFlight(pManager, "Enter name of destination airport:");
 		same = isSameAirport(pPortOr, pPortDes);
 		if (same)
@@ -23,10 +23,7 @@ void	initFlight(Flight* pFlight, const AirportManager* pManager)
 	getCorrectDate(&pFlight->date);
 }
 
-
-
-
-int		isFlightFromSourceName(const Flight* pFlight, const char* nameSource)
+int isFlightFromSourceName(const Flight *pFlight, const char *nameSource)
 {
 	if (strcmp(pFlight->nameSource, nameSource) == 0)
 		return 1;
@@ -34,44 +31,45 @@ int		isFlightFromSourceName(const Flight* pFlight, const char* nameSource)
 	return 0;
 }
 
-
-int		isFlightToDestName(const Flight* pFlight, const char* nameDest)
+int isFlightToDestName(const Flight *pFlight, const char *nameDest)
 {
 	if (strcmp(pFlight->nameDest, nameDest) == 0)
 		return 1;
 
 	return 0;
-
-
 }
 
-int		isPlaneCodeInFlight(const Flight* pFlight, const char*  code)
+int isPlaneCodeInFlight(const Flight *pFlight, const char *code)
 {
 	if (strcmp(pFlight->thePlane.code, code) == 0)
 		return 1;
 	return 0;
 }
 
-int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type)
+int isPlaneTypeInFlight(const Flight *pFlight, ePlaneType type)
 {
 	if (pFlight->thePlane.type == type)
 		return 1;
 	return 0;
 }
 
-
-void	printFlight(const void** pFlight)
+void printFlight(const void **pFlight)
 {
-	const Flight* pF = *(const Flight**)pFlight;
-	printf("Flight From %s To %s\t",pF->nameSource,pF->nameDest);
-	printDate(&pF->date);
-	printPlane(&pF->thePlane);
+	if (pFlight != NULL)
+	{
+		const Flight *pF = *(const Flight **)pFlight;
+		printf("Flight From %s To %s\t", pF->nameSource, pF->nameDest);
+		printDate(&pF->date);
+		printPlane(&pF->thePlane);
+	}
+	else
+		printf("\n~~~~~~NOT FOUND~~~~~~\n");
 }
 
-Airport* setAiportToFlight(const AirportManager* pManager, const char* msg)
+Airport *setAiportToFlight(const AirportManager *pManager, const char *msg)
 {
 	char name[MAX_STR_LEN];
-	Airport* port;
+	Airport *port;
 	do
 	{
 		printf("%s\t", msg);
@@ -84,18 +82,18 @@ Airport* setAiportToFlight(const AirportManager* pManager, const char* msg)
 	return port;
 }
 
-void	freeFlight(Flight* pFlight)
+void freeFlight(Flight *pFlight)
 {
 	free(pFlight->nameSource);
 	free(pFlight->nameDest);
 	free(pFlight);
 }
-readFlightFromFile(FILE *f, Flight * f1)
+int readFlightFromFile(FILE *f, Flight *f1)
 {
 	int len;
 	if (fread(&len, sizeof(int), 1, f) != 1)
 		return 0;
-	f1->nameSource= (char*)malloc(len * sizeof(char));
+	f1->nameSource = (char *)malloc(len * sizeof(char));
 	if (!f1->nameSource)
 		return 0;
 	if (fread(f1->nameSource, sizeof(char), len, f) != len)
@@ -105,7 +103,7 @@ readFlightFromFile(FILE *f, Flight * f1)
 	}
 	if (fread(&len, sizeof(int), 1, f) != 1)
 		return 0;
-	f1->nameDest = (char*)malloc(len * sizeof(char));
+	f1->nameDest = (char *)malloc(len * sizeof(char));
 	if (!f1->nameDest)
 		return 0;
 	if (fread(f1->nameDest, sizeof(char), len, f) != len)
@@ -116,5 +114,22 @@ readFlightFromFile(FILE *f, Flight * f1)
 	fread(&f1->thePlane, sizeof(Plane), 1, f);
 	fread(&f1->date, sizeof(Date), 1, f);
 
-return 1;
+	return 1;
+}
+int writeFlightToFile(FILE *pF, Flight *f1)
+{
+	int len = (int)strlen(f1->nameSource);
+	if (fwrite(&len, sizeof(int), 1, pF) != 1)
+		return 0;
+	if (fwrite(&f1->nameSource, sizeof(char), len, pF) != len)
+		return 0;
+	len = (int)strlen(f1->nameDest);
+	if (fwrite(&len, sizeof(int), 1, pF) != 1)
+		return 0;
+	if (fwrite(&f1->nameDest, sizeof(char), len, pF) != len)
+		return 0;
+	fwrite(&f1->thePlane, sizeof(Plane), 1, pF);
+	fwrite(&f1->date, sizeof(Date), 1, pF);
+
+	return 1;
 }

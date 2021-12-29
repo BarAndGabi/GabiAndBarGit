@@ -35,6 +35,7 @@ void freeCompany(Airline *pComp);
 int addDateToList(Airline *pComp, Date *d);
 int readAirlineFromFile(char *fileName, Airline *a);
 int sortFlights(Airline *pComp);
-int  searchFlight(Airline *pComp/*, AirportManager* m*/);
+int searchFlight(Airline *pComp);
+void writeAirlineToFile(const char *fileName, Airline *pComp);
 int flightsComparatorMenu();
 #endif
