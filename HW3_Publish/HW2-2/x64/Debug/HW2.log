@@ -1,16 +1,2 @@
-﻿  Address.c
-  Airline.c
-c:\users\afeka\desktop\hw3_publish\hw2-2\airline.c(231): warning C4029: declared formal parameter list different from definition
-c:\users\afeka\desktop\hw3_publish\hw2-2\airline.c(255): warning C4047: '=': 'char' differs in levels of indirection from 'char *'
-  Airport.c
-  AirportManager.c
-  Date.c
-  Flight.c
-  flightComperators.c
-  General.c
-  list.c
-  main.c
-  Plane.c
-  test.c
-  Generating Code...
+﻿  Airline.c
   HW2.vcxproj -> C:\Users\afeka\Desktop\HW3_Publish\HW2-2\x64\Debug\HW2.exe
