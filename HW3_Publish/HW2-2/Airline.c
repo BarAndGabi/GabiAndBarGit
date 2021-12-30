@@ -289,10 +289,10 @@ void writeAirlineToFile(const char *fileName, Airline *pComp)
 	FILE *pF = fopen(fileName, "wb");
 	if (!pF)
 		printf("There isnt a file to read from");
-	int len = (int)strlen(pComp->name);
+	int len = (int)strlen(pComp->name)+1;
 	if (fwrite(&len, sizeof(int), 1, pF) != 1)
 		return;
-	if (fwrite(&pComp->name, sizeof(char), len, pF) != len)
+	if (fwrite(pComp->name, sizeof(char), len, pF) != len)
 		return;
 	if (fwrite(&pComp->sortType, sizeof(int), 1, pF) != 1)
 		return;
