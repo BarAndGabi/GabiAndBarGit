@@ -4,7 +4,7 @@
 #include "General.h"
 #include "Date.h"
 
-const int DAY_MONTHS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+const int DAY_MONTHS[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 #define SPECIAL_TAV '$'
 
 void getCorrectDate(Date *pDate)
@@ -15,7 +15,7 @@ void getCorrectDate(Date *pDate)
 	do
 	{
 		printf("Enter Flight Date dd%c%cmm%c%cyyyy  minimum year %d\t",
-			   SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, MIN_YEAR);
+			SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, MIN_YEAR);
 		myGets(date, MAX_STR_LEN);
 		ok = checkDate(date, pDate);
 		if (!ok)
@@ -48,51 +48,9 @@ void printDate(const Date *pDate)
 {
 	printf("Date: %d/%d/%d\n", pDate->day, pDate->month, pDate->year);
 }
-int compare_dates(const Date *d1, const Date *d2)
-{
-	if (d1->year < d2->year)
-		return -1;
 
-	else if (d1->year > d2->year)
-		return 1;
 
-	if (d1->year == d2->year)
-	{
-		if (d1->month < d2->month)
-			return -1;
-		else if (d1->month > d2->month)
-			return 1;
-		else if (d1->day < d2->day)
-			return -1;
-		else if (d1->day > d2->day)
-			return 1;
-		else
-			return 0;
-	}
-	return 0;
-}
 
-int isBetweenOrEqualToFirst(const Date *d1,const  Date *d2,const  Date *x)
-{
-	switch (compare_dates(d1, x))
-	{
-	case -1:
-		if (compare_dates(d2, x) == 1)
-			return 1;
-		else
-			return 0;
-		break;
-	case 0:
-		return 1;
-		break;
-	case 1:
-		return 0;
-		break;
-	default:
-		return 0;
-		break;
-	}
-}
 int compareDate(const void * pDate1, const void * pDate2)
 {
 	const Date* d1 = (const Date*)pDate1;

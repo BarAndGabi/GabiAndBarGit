@@ -34,50 +34,26 @@ int addFlight(Airline *pComp, const AirportManager *pManager)
 
 	addDateToList(pComp, &pComp->flightArr[pComp->flightCount]->date);
 	pComp->flightCount++;
+	pComp->sortType = 0;
 	return 1;
 }
-int addDateToList(Airline *pComp, Date *d)
+void addDateToList(Airline *pComp, Date *d)
 {
-	NODE *runner = &pComp->Dates.head;
-	if (runner->next == NULL) //if empty
+	NODE* node = &pComp->Dates.head;
+	if (!node)
+		return;
+	int comparatorAnswer;
+	while (node->next)
 	{
-		L_insert(runner, d);
-		return 1;
+		comparatorAnswer = compareDate(node->next->key, d);
+		if (comparatorAnswer == 0)    
+			return;
+		else if (comparatorAnswer > 0)    
+			break;
+		else          
+			node = node->next;
 	}
-	else
-	{
-		if (compare_dates(runner->next->key, d) == 1) //if smaller then the first
-		{
-			L_insert(runner, d);
-			return 1;
-		}
-		while (runner->next != NULL)
-		{
-			runner = runner->next;
-			if (compare_dates(runner->key, d) != 0)
-			{
-				if (runner->next != NULL)
-				{
-					if (isBetweenOrEqualToFirst(runner->key, runner->next->key, d) == 1)
-					{
-						L_insert(runner->next, d);
-						return 1;
-					}
-				}
-				else
-				{
-					L_insert(runner, d);
-				}
-			}
-			else
-			{
-				printf("date is already in list \n");
-				return 1;
-			}
-		}
-	}
-
-	return 1;
+	L_insert(node, d);
 }
 void getDatesFrommArr(Airline *a)
 {
@@ -90,6 +66,8 @@ void getDatesFrommArr(Airline *a)
 int readAirlineFromFile(char *fileName, Airline *a)
 {
 	FILE *f = fopen(fileName, "rb");
+	if (f == NULL)
+		return 0;
 	int len;
 	if (fread(&len, sizeof(int), 1, f) != 1)
 		return 0;
@@ -289,7 +267,7 @@ void writeAirlineToFile(const char *fileName, Airline *pComp)
 	FILE *pF = fopen(fileName, "wb");
 	if (!pF)
 		printf("There isnt a file to read from");
-	int len = (int)strlen(pComp->name)+1;
+	int len = (int)strlen(pComp->name) + 1;
 	if (fwrite(&len, sizeof(int), 1, pF) != 1)
 		return;
 	if (fwrite(pComp->name, sizeof(char), len, pF) != len)
@@ -300,7 +278,7 @@ void writeAirlineToFile(const char *fileName, Airline *pComp)
 		return;
 	for (size_t i = 0; i < pComp->flightCount; i++)
 	{
-		writeFlightToFile(pF,pComp->flightArr[i]);
+		writeFlightToFile(pF, pComp->flightArr[i]);
 	}
 
 	fclose(pF);

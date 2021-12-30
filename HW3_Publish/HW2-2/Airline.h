@@ -32,7 +32,7 @@ void doPrintFlightsWithPlaneCode(const Airline *pComp);
 void doPrintFlightsWithPlaneType(const Airline *pComp);
 void freeFlightArr(Flight **arr, int size);
 void freeCompany(Airline *pComp);
-int addDateToList(Airline *pComp, Date *d);
+void addDateToList(Airline *pComp, Date *d);
 int readAirlineFromFile(char *fileName, Airline *a);
 int sortFlights(Airline *pComp);
 int searchFlight(Airline *pComp);

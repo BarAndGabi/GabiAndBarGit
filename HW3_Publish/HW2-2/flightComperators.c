@@ -33,5 +33,5 @@ int compareFlightByDate(const void** f1, const void** f2)
 	const Flight* flight1 = *(const Flight**)f1;
 	const Flight* flight2 = *(const Flight**)f2;
 
-	return compare_dates(&flight1->date, &flight2->date);
+	return compareDate(&flight1->date, &flight2->date);
 }
