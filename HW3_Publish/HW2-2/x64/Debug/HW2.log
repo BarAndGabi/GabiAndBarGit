@@ -1,7 +1,9 @@
 ﻿  Address.c
   Airline.c
+  AirlineBinFile.c
   Airport.c
   AirportManager.c
+  AirportManagerTextFile.c
   Date.c
   Flight.c
   flightComperators.c

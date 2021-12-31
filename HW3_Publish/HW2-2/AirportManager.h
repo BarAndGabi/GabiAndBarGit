@@ -2,7 +2,6 @@
 #define __AIR_MANAGER__
 
 #include "Airport.h"
-
 typedef struct
 {
 	Airport*	airportsArr;
@@ -15,8 +14,5 @@ void	initAirport(Airport* pPort, AirportManager* pManager);
 Airport* findAirportByName(const AirportManager* pManager, const char* name);
 int		checkUniqeName(const char* name, const AirportManager* pManager);
 void	printAirports(const AirportManager* pManager);
-void    writeAirportsToFile(const char* fileName, AirportManager* pManager);
-int   readAirportsFromFile(const char* fileName, AirportManager* pManager);
 void	freeManager(AirportManager* pManager);
-void    freeAirportsArr(Airport* ports,int size);
 #endif

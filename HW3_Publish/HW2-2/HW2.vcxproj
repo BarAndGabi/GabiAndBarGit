@@ -113,8 +113,10 @@
   <ItemGroup>
     <ClInclude Include="Address.h" />
     <ClInclude Include="Airline.h" />
+    <ClInclude Include="AirlineBinFile.h" />
     <ClInclude Include="Airport.h" />
     <ClInclude Include="AirportManager.h" />
+    <ClInclude Include="AirportManagerTextFile.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="Flight.h" />
     <ClInclude Include="flightComperators.h" />
@@ -126,8 +128,10 @@
   <ItemGroup>
     <ClCompile Include="Address.c" />
     <ClCompile Include="Airline.c" />
+    <ClCompile Include="AirlineBinFile.c" />
     <ClCompile Include="Airport.c" />
     <ClCompile Include="AirportManager.c" />
+    <ClCompile Include="AirportManagerTextFile.c" />
     <ClCompile Include="Date.c" />
     <ClCompile Include="Flight.c" />
     <ClCompile Include="flightComperators.c" />

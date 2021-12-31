@@ -48,6 +48,12 @@
     <ClInclude Include="flightComperators.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AirportManagerTextFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AirlineBinFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Airport.c">
@@ -84,6 +90,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="flightComperators.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AirportManagerTextFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AirlineBinFile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

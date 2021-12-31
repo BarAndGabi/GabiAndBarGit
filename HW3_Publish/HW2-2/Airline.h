@@ -33,9 +33,9 @@ void doPrintFlightsWithPlaneType(const Airline *pComp);
 void freeFlightArr(Flight **arr, int size);
 void freeCompany(Airline *pComp);
 void addDateToList(Airline *pComp, Date *d);
-int readAirlineFromFile(char *fileName, Airline *a);
+//int readAirlineFromFile(char *fileName, Airline *a);
 int sortFlights(Airline *pComp);
 int searchFlight(Airline *pComp);
-void writeAirlineToFile(const char *fileName, Airline *pComp);
+//void writeAirlineToFile(const char *fileName, Airline *pComp);
 int flightsComparatorMenu();
 #endif

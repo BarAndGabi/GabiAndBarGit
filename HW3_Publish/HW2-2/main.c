@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "Airline.h"
 #include "AirportManager.h"
+#include "AirportManagerTextFile.h"
+#include "AirlineBinFile.h"
 #include "General.h"
 #define TEXT_FILE "airport_authority.txt"
 #define BIN_FILE "airline.bin"
