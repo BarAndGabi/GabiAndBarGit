@@ -13,5 +13,5 @@ typedef struct
 void getCorrectDate(Date *pDate);
 int checkDate(char *date, Date *pDate);
 void printDate(const Date *pDate);
-int compareDate(const void * pDate1, const void * pDate2);
+int compareDate(const void *pDate1, const void *pDate2);
 #endif

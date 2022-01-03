@@ -1,5 +1,5 @@
 #ifndef _AIRPORTMANAGER_TEXT_
-#define  _AIRPORTMANAGER_TEXT_
+#define _AIRPORTMANAGER_TEXT_
 
 #include "AirportManager.h"
 

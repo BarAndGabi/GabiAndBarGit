@@ -118,12 +118,12 @@ int readFlightFromFile(FILE *f, Flight *f1)
 }
 int writeFlightToFile(FILE *pF, Flight *f1)
 {
-	int len = (int)strlen(f1->nameSource)+1;
+	int len = (int)strlen(f1->nameSource) + 1;
 	if (fwrite(&len, sizeof(int), 1, pF) != 1)
 		return 0;
 	if (fwrite(f1->nameSource, sizeof(char), len, pF) != len)
 		return 0;
-	len = (int)strlen(f1->nameDest)+1;
+	len = (int)strlen(f1->nameDest) + 1;
 	if (fwrite(&len, sizeof(int), 1, pF) != 1)
 		return 0;
 	if (fwrite(f1->nameDest, sizeof(char), len, pF) != len)

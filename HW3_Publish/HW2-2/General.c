@@ -87,7 +87,7 @@ void generalArrayFunction(const void *arr, int size, int sizeOfElement, void (*f
 {
 	for (size_t i = 0; i < size; i++)
 	{
-		f((char*)arr + i * sizeOfElement);
+		f((char *)arr + i * sizeOfElement);
 		NEXT_LINE;
 	}
 }

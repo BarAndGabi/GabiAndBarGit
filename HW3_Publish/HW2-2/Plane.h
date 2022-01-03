@@ -2,21 +2,24 @@
 
 #define CODE_LENGTH 4
 
-typedef enum { 
-	eCommercial, eCargo, eMilitary, eNofPlaneTypes 
+typedef enum
+{
+	eCommercial,
+	eCargo,
+	eMilitary,
+	eNofPlaneTypes
 } ePlaneType;
 
-
-static const char* PlaneTypeStr[eNofPlaneTypes];
+static const char *PlaneTypeStr[eNofPlaneTypes];
 
 typedef struct
 {
-	ePlaneType	type;
-	char	code[CODE_LENGTH + 1];
-}Plane;
+	ePlaneType type;
+	char code[CODE_LENGTH + 1];
+} Plane;
 
-void		initPlane(Plane* pPlane);
-ePlaneType	getPlaneType();
-void		getPlaneCode(char* code);
-void		printPlane(const Plane* pPlane);
+void initPlane(Plane *pPlane);
+ePlaneType getPlaneType();
+void getPlaneCode(char *code);
+void printPlane(const Plane *pPlane);
 //Plane* readPlaneFromFile(FILE* f);
