@@ -4,7 +4,7 @@
 #include "General.h"
 #include "Date.h"
 
-const int DAY_MONTHS[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int DAY_MONTHS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 #define SPECIAL_TAV '$'
 
 void getCorrectDate(Date *pDate)
@@ -15,7 +15,7 @@ void getCorrectDate(Date *pDate)
 	do
 	{
 		printf("Enter Flight Date dd%c%cmm%c%cyyyy  minimum year %d\t",
-			SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, MIN_YEAR);
+			   SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, SPECIAL_TAV, MIN_YEAR);
 		myGets(date, MAX_STR_LEN);
 		ok = checkDate(date, pDate);
 		if (!ok)
@@ -49,12 +49,10 @@ void printDate(const Date *pDate)
 	printf("Date: %d/%d/%d\n", pDate->day, pDate->month, pDate->year);
 }
 
-
-
-int compareDate(const void * pDate1, const void * pDate2)
+int compareDate(const void *pDate1, const void *pDate2)
 {
-	const Date* d1 = (const Date*)pDate1;
-	const Date* d2 = (const Date*)pDate2;
+	const Date *d1 = (const Date *)pDate1;
+	const Date *d2 = (const Date *)pDate2;
 	if (d1->year == d2->year)
 	{
 		if (d1->month == d2->month)

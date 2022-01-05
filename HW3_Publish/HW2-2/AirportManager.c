@@ -84,11 +84,9 @@ void printAirports(const AirportManager *pManager)
 	generalArrayFunction(pManager->airportsArr, pManager->airportsCount, sizeof(Airport), printAirport);
 }
 
-
 void freeManager(AirportManager *pManager)
 {
 	for (int i = 0; i < pManager->airportsCount; i++)
 		freeAirport(&pManager->airportsArr[i]);
 	free(pManager->airportsArr);
 }
-

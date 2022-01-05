@@ -77,4 +77,3 @@ int readAirlineFromFile(char *fileName, Airline *a)
 	fclose(f);
 	return 1;
 }
-

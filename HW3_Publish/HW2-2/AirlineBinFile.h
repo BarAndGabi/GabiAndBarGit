@@ -4,4 +4,4 @@
 #include "Airline.h"
 int readAirlineFromFile(char *fileName, Airline *a);
 void writeAirlineToFile(const char *fileName, Airline *pComp);
-#endif 
+#endif
