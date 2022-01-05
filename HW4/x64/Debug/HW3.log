@@ -1,0 +1,23 @@
+﻿  Address.c
+  Airline.c
+c:\users\afeka\desktop\hw3\airline.c(240): warning C4090: 'function': different 'const' qualifiers
+c:\users\afeka\desktop\hw3\airline.c(262): warning C4013: 'readFlightArr' undefined; assuming extern returning int
+c:\users\afeka\desktop\hw3\airline.c(274): warning C4133: 'function': incompatible types - from 'const AirportManager *' to 'const char *'
+c:\users\afeka\desktop\hw3\airline.c(274): warning C4020: 'saveAirlineToFile': too many actual parameters
+c:\users\afeka\desktop\hw3\airline.c(280): warning C4133: 'function': incompatible types - from 'const AirportManager *' to 'const char *'
+c:\users\afeka\desktop\hw3\airline.c(280): warning C4020: 'saveAirlineToFileCompressed': too many actual parameters
+c:\users\afeka\desktop\hw3\airline.c(298): warning C4013: 'loadAirlineToFileCompressed' undefined; assuming extern returning int
+  Airport.c
+  AirportManager.c
+  Date.c
+  fileHelper.c
+  Flight.c
+  General.c
+  GeneralList.c
+  main.c
+c:\users\afeka\desktop\hw3\main.c(90): warning C4020: 'saveAirlineToFile': too many actual parameters
+  Plane.c
+  Generating Code...
+c:\users\afeka\desktop\hw3\airline.c(482): warning C4715: 'readFlightArr': not all control paths return a value
+Airline.obj : error LNK2019: unresolved external symbol loadAirlineToFileCompressed referenced in function compressOrNoCompressToLoad
+C:\Users\afeka\Desktop\HW3\x64\Debug\HW3.exe : fatal error LNK1120: 1 unresolved externals
