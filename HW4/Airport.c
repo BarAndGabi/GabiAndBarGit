@@ -6,8 +6,7 @@
 #include "General.h"
 #include "Address.h"
 
-
-int	isSameAirport(const Airport* pPort1, const Airport* pPort2)
+int isSameAirport(const Airport *pPort1, const Airport *pPort2)
 {
 	if (!pPort1 || !pPort2)
 		return 0;
@@ -17,7 +16,7 @@ int	isSameAirport(const Airport* pPort1, const Airport* pPort2)
 	return 0;
 }
 
-int	isAirportName(const Airport* pPort1, const char* name)
+int isAirportName(const Airport *pPort1, const char *name)
 {
 	if (!pPort1)
 		return 0;
@@ -27,51 +26,50 @@ int	isAirportName(const Airport* pPort1, const char* name)
 	return 0;
 }
 
-void	initAirportNoName(Airport* pPort)
+void initAirportNoName(Airport *pPort)
 {
 	//only address!!!
 	pPort->address = getAddress();
 }
 
-void	printAirport(const Airport* pPort)
+void printAirport(const Airport *pPort)
 {
 	printf("Airport name:%-20s\t", pPort->name);
 	printf("Airport address: %s\n", pPort->address);
 }
 
-void	printAriportV(const void* pP)
+void printAriportV(const void *pP)
 {
-	const Airport* pPort = (const Airport*)pP;
+	const Airport *pPort = (const Airport *)pP;
 	printAirport(pPort);
 }
 
-void	freeAirport(Airport* pPort)
+void freeAirport(Airport *pPort)
 {
 	free(pPort->name);
 	free(pPort->address);
 }
 
-int		saveAirportToFile(const Airport* pAir, FILE* fp)
+int saveAirportToFile(const Airport *pAir, FILE *fp)
 {
 	if (!pAir)
 		return 0;
 	fprintf(fp, "%s\n", pAir->name);
 	fprintf(fp, "%s\n", pAir->address);
-	
+
 	return 1;
 }
 
-int		loadAirportFromFile(Airport* pAir, FILE* fp)
+int loadAirportFromFile(Airport *pAir, FILE *fp)
 {
 	char temp[MAX_STR_LEN];
 	if (!pAir)
 		return 0;
-	
+
 	myGets(temp, MAX_STR_LEN, fp);
 	pAir->name = getDynStr(temp);
-	
+
 	myGets(temp, MAX_STR_LEN, fp);
 	pAir->address = getDynStr(temp);
 	return 1;
-
 }

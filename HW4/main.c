@@ -87,7 +87,7 @@ int main()
 	} while (!stop);
 
 	saveManagerToFile(&manager, MANAGER_FILE_NAME);
-	saveAirlineToFile(&company, airlineFileName,compress);
+//	saveAirlineToFile(&company, airlineFileName,compress);
 	freeManager(&manager);
 	freeCompany(&company);
 

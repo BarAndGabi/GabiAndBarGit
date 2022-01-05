@@ -6,11 +6,11 @@
 #include "General.h"
 #include "Address.h"
 
-char*	getAddress()
+char *getAddress()
 {
 	//0 - country, 1 - city, 2 - street
-	char* paramsArr[3];
-	char* paramsArrStr[3] = { "country","city","street" };
+	char *paramsArr[3];
+	char *paramsArrStr[3] = {"country", "city", "street"};
 	int num;
 	char numStr[MAX_STR_LEN];
 
@@ -25,7 +25,7 @@ char*	getAddress()
 	scanf("%d", &num);
 	sprintf(numStr, "%d", num);
 
-	char* address = combineParams(paramsArr, 3, numStr);
+	char *address = combineParams(paramsArr, 3, numStr);
 
 	for (int i = 0; i < 3; i++)
 		free(paramsArr[i]);
@@ -33,11 +33,10 @@ char*	getAddress()
 	return address;
 }
 
-
-char*	getParam(const char* msg)
+char *getParam(const char *msg)
 {
 	char temp[MAX_STR_LEN];
-	char* param;
+	char *param;
 
 	printf("Enter %s:\t", msg);
 	myGets(temp, MAX_STR_LEN, stdin);
@@ -47,16 +46,16 @@ char*	getParam(const char* msg)
 	return param;
 }
 
-char*	fixAddressParam(char* param)
+char *fixAddressParam(char *param)
 {
-	char* fixParamStr;
-	char** wordsArray = NULL;
+	char *fixParamStr;
+	char **wordsArray = NULL;
 	int totalLength;
 	int count;
 
 	wordsArray = splitCharsToWords(param, &count, &totalLength);
 	//add size for the WORD_SEP between words
-	fixParamStr = (char*)calloc(totalLength + count, sizeof(char));
+	fixParamStr = (char *)calloc(totalLength + count, sizeof(char));
 	if (!fixParamStr)
 	{
 		for (int i = 0; i < count; i++)
@@ -70,7 +69,8 @@ char*	fixAddressParam(char* param)
 		wordsArray[0][0] = tolower(wordsArray[0][0]);
 		strcpy(fixParamStr, wordsArray[0]);
 	}
-	else { //more than 1 word
+	else
+	{ //more than 1 word
 
 		int len;
 		for (int i = 0; i < count; i++)
@@ -78,8 +78,9 @@ char*	fixAddressParam(char* param)
 			len = (int)strlen(wordsArray[i]);
 			if (len % 2 == 0) //even number of letters
 				changeEvenWord(wordsArray[i]);
-			else {
-				if (i == count - 1) //last but not only!
+			else
+			{
+				if (i == count - 1)								  //last but not only!
 					wordsArray[i][0] = tolower(wordsArray[i][0]); //small
 				else
 					wordsArray[i][0] = toupper(wordsArray[i][0]); //big
@@ -94,10 +95,9 @@ char*	fixAddressParam(char* param)
 	free(wordsArray);
 
 	return fixParamStr;
-
 }
 
-void	changeEvenWord(char* str)
+void changeEvenWord(char *str)
 {
 	int index = 0;
 	while (*str)
@@ -111,15 +111,15 @@ void	changeEvenWord(char* str)
 	}
 }
 
-char*	combineParams(char** strArr, int length, char* numStr)
+char *combineParams(char **strArr, int length, char *numStr)
 {
-	char* address;
+	char *address;
 	//totalLength  - combine length + 3 PARAM_SEP + 1 '\0'
 	size_t totalLength = 4 + strlen(numStr);
 	for (int i = 0; i < length; i++)
 		totalLength += strlen(strArr[i]);
 
-	address = (char*)calloc(totalLength, sizeof(char));
+	address = (char *)calloc(totalLength, sizeof(char));
 	if (!address)
 		return NULL;
 
