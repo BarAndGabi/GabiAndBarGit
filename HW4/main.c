@@ -87,7 +87,10 @@ int main()
 	} while (!stop);
 
 	saveManagerToFile(&manager, MANAGER_FILE_NAME);
-//	saveAirlineToFile(&company, airlineFileName,compress);
+	//saveAirlineToFile(&company, );
+	saveAirlineToFileCompressed(&company, airlineFileName);
+	return 0;
+
 	freeManager(&manager);
 	freeCompany(&company);
 
@@ -105,7 +108,7 @@ int initManagerAndAirline(AirportManager* pManager, Airline* pCompany,const char
 	}
 
 	if (res == FROM_FILE)
-		return initAirlineFromFile(pCompany, pManager, ailineFileName);
+		compressOrNoCompressToLoad(pCompany,pManager,ailineFileName,compress);
 	else
 		initAirline(pCompany);
 	return 1;

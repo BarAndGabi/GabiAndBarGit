@@ -1,13 +1,2 @@
-﻿  Address.c
-  Airline.c
-  Airport.c
-  AirportManager.c
-  Date.c
-  fileHelper.c
-  Flight.c
-  General.c
-  GeneralList.c
-  main.c
-  Plane.c
-  Generating Code...
+﻿  Airline.c
   HW3.vcxproj -> C:\Users\afeka\Desktop\HW4\x64\Debug\HW3.exe

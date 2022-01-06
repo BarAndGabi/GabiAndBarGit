@@ -156,7 +156,83 @@ int saveAirlineToFile(const Airline *pComp, const char *fileName)
 
 int saveAirlineToFileCompressed(const Airline *pComp, const char *filename)
 {
-	return 0;
+	BYTE bytes[2] = { 0 };
+	FILE* pF = fopen(filename, "wb");
+	int len = (int)strlen(pComp->name);
+	bytes[0] = pComp->flightCount >> 1;
+	bytes[1] = pComp->flightCount << 7 | pComp->sortOpt << 4 | len ;
+	if (fwrite(&bytes, sizeof(BYTE), 2, pF) != 2) {
+		fclose(pF);
+		return 0;
+	}
+	if (fwrite(pComp->name, sizeof(char), len, pF) != len) {
+		fclose(pF);
+		return 0;
+	}
+
+	for (size_t i = 0; i < pComp->flightCount; i++)
+	{
+		if(!saveFlightToFileCompressed(pComp->flightArr[i],pF))
+		{
+			fclose(pF);
+			return 0;
+		}
+	}
+	return 1;
+}
+
+
+int loadAirlineFromFileCompressed(Airline *pComp, const AirportManager *pManager, const char *file)
+{
+	BYTE bytes[2];
+	FILE *pF = fopen(file, "rb");
+	if (!pF)
+		return 0;
+
+	if (fread(&bytes, sizeof(BYTE), 2, pF) != 2)
+	{
+		fclose(pF);
+		return 0;
+	}
+	pComp->flightCount = bytes[1] >> 7 & 0x1 | bytes[0] << 1;
+	pComp->sortOpt = bytes[1] >> 4 & 0x7;
+	int len = bytes[1] & 0xF;
+	pComp->name = readStringFromFile2(pF, len);
+	if (pComp->flightCount > 0)
+	{
+		pComp->flightArr = (Flight **)malloc(pComp->flightCount * sizeof(Flight *));
+		if (!pComp->flightArr)
+		{
+			printf("Alocation error\n");
+			fclose(pF);
+			return 0;
+		}
+	}
+	else
+		pComp->flightArr = NULL;
+
+	for (int i = 0; i < pComp->flightCount; i++)
+	{
+
+		pComp->flightArr[i] = (Flight *)calloc(1, sizeof(Flight));
+		if (!pComp->flightArr[i])
+		{
+			printf("Alocation error\n");
+			free(pComp->flightArr);
+			fclose(pF);
+			return 0;
+		}
+		if (!loadFlightFromFileCompressed(pComp->flightArr[i], pManager, pF))
+		{
+
+			free(pComp->flightArr);
+			fclose(pF);
+			return 0;
+		}
+	}
+	L_init(&pComp->flighDateList);
+	initDateList(pComp);
+	return 1;
 }
 
 int loadAirlineFromFile(Airline *pComp, const AirportManager *pManager, const char *fileName)
@@ -228,39 +304,6 @@ int loadAirlineFromFile(Airline *pComp, const AirportManager *pManager, const ch
 	return 1;
 }
 
-int loadAirlineFromFileCompressed(Airline *pComp, const AirportManager *pManager, const char *file)
-{
-	BYTE bytes[2];
-	FILE *pF = fopen(file, "rb");
-	if (!pF)
-		return 0;
-
-	if (fread(&bytes, sizeof(BYTE), 2, pF) != 2)
-	{
-		fclose(pF);
-		return 0;
-	}
-	pComp->flightCount = (bytes[1] >> 7 & 0x1 | bytes[0] << 1) + ((bytes[0] & 0x80) * 2);
-	pComp->sortOpt = bytes[1] >> 4 & 0x7;
-	int len = bytes[1] & 0xF;
-	pComp->name = readStringFromFile2(pF, len);
-	if (pComp->flightCount > 0)
-	{
-		pComp->flightArr = (Flight **)malloc(pComp->flightCount * sizeof(Flight *));
-		if (!pComp->flightArr)
-		{
-			printf("Alocation error\n");
-			fclose(pF);
-			return 0;
-		}
-	}
-	else
-		pComp->flightArr = NULL;
-
-	//readFlightArr(pF, pComp, pManager);
-
-	return 0;
-}
 
 void compressOrNoCompressToSave(Airline *pComp, const AirportManager *pManager, const char *file, int compress)
 {
@@ -447,24 +490,3 @@ void freeCompany(Airline *pComp)
 	L_free(&pComp->flighDateList, freeDate);
 }
 
-int readFlightArr(FILE *pF, Airline *pComp, AirportManager *pManager)
-{
-	for (int i = 0; i < pComp->flightCount; i++)
-	{
-		pComp->flightArr[i] = (Flight *)calloc(1, sizeof(Flight));
-		if (!pComp->flightArr[i])
-		{
-			printf("Alocation error\n");
-			free(pComp->flightArr);
-			fclose(pF);
-			return 0;
-		}
-		if (!loadFlightFromFileCompressed(pComp->flightArr[i], pManager, pF))
-		{
-			free(pComp->flightArr);
-			fclose(pF);
-			return 0;
-		}
-	}
-	return 1;
-}
