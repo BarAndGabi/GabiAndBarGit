@@ -9,7 +9,7 @@
 #include "fileHelper.h"
 
 static const char *sortOptStr[eNofSortOpt] = {
-	"None", "Source Name", "Dest Name", "Date", "Plane Code" };
+	"None", "Source Name", "Dest Name", "Date", "Plane Code"};
 
 int initAirlineFromFile(Airline *pComp, AirportManager *pManaer, const char *fileName)
 {
@@ -156,23 +156,25 @@ int saveAirlineToFile(const Airline *pComp, const char *fileName)
 
 int saveAirlineToFileCompressed(const Airline *pComp, const char *filename)
 {
-	BYTE bytes[2] = { 0 };
-	FILE* pF = fopen(filename, "wb");
+	BYTE bytes[2] = {0};
+	FILE *pF = fopen(filename, "wb");
 	int len = (int)strlen(pComp->name);
 	bytes[0] = pComp->flightCount >> 1;
-	bytes[1] = pComp->flightCount << 7 | pComp->sortOpt << 4 | len ;
-	if (fwrite(&bytes, sizeof(BYTE), 2, pF) != 2) {
+	bytes[1] = pComp->flightCount << 7 | pComp->sortOpt << 4 | len;
+	if (fwrite(&bytes, sizeof(BYTE), 2, pF) != 2)
+	{
 		fclose(pF);
 		return 0;
 	}
-	if (fwrite(pComp->name, sizeof(char), len, pF) != len) {
+	if (fwrite(pComp->name, sizeof(char), len, pF) != len)
+	{
 		fclose(pF);
 		return 0;
 	}
 
 	for (size_t i = 0; i < pComp->flightCount; i++)
 	{
-		if(!saveFlightToFileCompressed(pComp->flightArr[i],pF))
+		if (!saveFlightToFileCompressed(pComp->flightArr[i], pF))
 		{
 			fclose(pF);
 			return 0;
@@ -180,7 +182,6 @@ int saveAirlineToFileCompressed(const Airline *pComp, const char *filename)
 	}
 	return 1;
 }
-
 
 int loadAirlineFromFileCompressed(Airline *pComp, const AirportManager *pManager, const char *file)
 {
@@ -234,7 +235,6 @@ int loadAirlineFromFileCompressed(Airline *pComp, const AirportManager *pManager
 	initDateList(pComp);
 	return 1;
 }
-
 int loadAirlineFromFile(Airline *pComp, const AirportManager *pManager, const char *fileName)
 {
 	FILE *fp;
@@ -303,25 +303,6 @@ int loadAirlineFromFile(Airline *pComp, const AirportManager *pManager, const ch
 	fclose(fp);
 	return 1;
 }
-
-
-void compressOrNoCompressToSave(Airline *pComp, const AirportManager *pManager, const char *file, int compress)
-{
-	switch (compress)
-	{
-	case 0:
-	{
-
-		//saveAirlineToFile(pComp, pManager, file);
-	}
-	case 1:
-	{
-
-		//saveAirlineToFileCompressed(pComp, pManager, file);
-	}
-	}
-}
-
 void compressOrNoCompressToLoad(Airline *pComp, const AirportManager *pManager, const char *file, int compress)
 {
 	switch (compress)
@@ -334,11 +315,10 @@ void compressOrNoCompressToLoad(Airline *pComp, const AirportManager *pManager, 
 		break;
 	}
 }
-
 void sortFlight(Airline *pComp)
 {
 	pComp->sortOpt = showSortMenu();
-	int(*compare)(const void *air1, const void *air2) = NULL;
+	int (*compare)(const void *air1, const void *air2) = NULL;
 
 	switch (pComp->sortOpt)
 	{
@@ -362,8 +342,8 @@ void sortFlight(Airline *pComp)
 
 void findFlight(const Airline *pComp)
 {
-	int(*compare)(const void *air1, const void *air2) = NULL;
-	Flight f = { 0 };
+	int (*compare)(const void *air1, const void *air2) = NULL;
+	Flight f = {0};
 	Flight *pFlight = &f;
 
 	switch (pComp->sortOpt)
@@ -489,4 +469,3 @@ void freeCompany(Airline *pComp)
 	//free the Date* in the list
 	L_free(&pComp->flighDateList, freeDate);
 }
-

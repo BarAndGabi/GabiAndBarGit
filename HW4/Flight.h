@@ -23,12 +23,10 @@ Airport *setAiportToFlight(const AirportManager *pManager, const char *msg);
 int isPlaneCodeInFlight(const Flight *pFlight, const char *code);
 int isPlaneTypeInFlight(const Flight *pFlight, ePlaneType type);
 void freeFlight(Flight *pFlight);
-
 int loadFlightFromFile(Flight *pFlight, const AirportManager *pManager, FILE *fp);
-int loadFlightFromFileCompressed(Flight* pFlight, const AirportManager *pManager, FILE *fp);
-int saveFlightToFileCompressed( Flight *pFlight, FILE *fp);
+int loadFlightFromFileCompressed(Flight *pFlight, const AirportManager *pManager, FILE *pFileToLoad);
+int saveFlightToFileCompressed(Flight *pFlight, FILE *fp);
 int saveFlightToFile(const Flight *pFlight, FILE *fp);
-
 int compareFlightBySourceName(const void *air1, const void *air2);
 int compareFlightByDestName(const void *air1, const void *air2);
 int compareFlightByPlaneCode(const void *air1, const void *air2);

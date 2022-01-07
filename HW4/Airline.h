@@ -33,19 +33,14 @@ void printFlightArr(Flight **pFlight, int size);
 void doCountFlightsFromName(const Airline *pComp);
 void doPrintFlightsWithPlaneCode(const Airline *pComp);
 void doPrintFlightsWithPlaneType(const Airline *pComp);
-int saveAirlineToFile(const Airline *pComp, const char *fileName);
-int saveAirlineToFileCompressed(const Airline *pComp, const char *filename);
 int loadAirlineFromFile(Airline *pComp, const AirportManager *pManager, const char *fileName);
-int loadAirlineFromFileCompressed(Airline *pComp, const AirportManager *pManager, const char *file);
-void compressOrNoCompressToSave(Airline *pComp, const AirportManager *pManager, const char *file, int compress);
+int loadAirlineFromeFileCompressed(Airline *pComp, const AirportManager *pManager, const char *file);
 void compressOrNoCompressToLoad(Airline *pComp, const AirportManager *pManager, const char *file, int compress);
 void sortFlight(Airline *pComp);
 void findFlight(const Airline *pComp);
-
 int initDateList(Airline *pComp);
 int insertFlightDateToList(LIST *lst, Flight *pFlight);
 NODE *insertDateToList(NODE *pNode, Date *pDate);
-
 void freeFlightArr(Flight **arr, int size);
 eSortOption showSortMenu();
 void freeCompany(Airline *pComp);

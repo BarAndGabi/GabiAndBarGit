@@ -152,29 +152,29 @@ int loadFlightFromFile(Flight *pF, const AirportManager *pManager, FILE *fp)
 	return 1;
 }
 
-int loadFlightFromFileCompressed(Flight* pFlight, const AirportManager *pManager, FILE *fp)
+int loadFlightFromFileCompressed(Flight *pFlight, const AirportManager *pManager, FILE *pFileToLoad)
 {
 	char add = 65;
 	BYTE bytes1[2];
 	BYTE bytes2[3];
 	BYTE bytes3[1];
-	if (fread(&bytes1, sizeof(BYTE), 2, fp) != 2)
+	if (fread(&bytes1, sizeof(BYTE), 2, pFileToLoad) != 2)
 	{
-		fclose(fp);
+		fclose(pFileToLoad);
 		return 0;
 	}
-	if (fread(&bytes2, sizeof(BYTE), 3, fp) != 3)
+	if (fread(&bytes2, sizeof(BYTE), 3, pFileToLoad) != 3)
 	{
-		fclose(fp);
+		fclose(pFileToLoad);
 		return 0;
 	}
-	if (fread(&bytes3, sizeof(BYTE), 1, fp) != 1)
+	if (fread(&bytes3, sizeof(BYTE), 1, pFileToLoad) != 1)
 	{
-		fclose(fp);
+		fclose(pFileToLoad);
 		return 0;
 	}
 	int sourceNameLen = bytes1[0] >> 3 & 0x1F;
-	pFlight->nameSource = readStringFromFile2(fp, sourceNameLen);
+	pFlight->nameSource = readStringFromFile2(pFileToLoad, sourceNameLen);
 	if (findAirportByName(pManager, pFlight->nameSource) == NULL)
 	{
 		printf("Airport %s not in manager\n", pFlight->nameSource);
@@ -182,7 +182,7 @@ int loadFlightFromFileCompressed(Flight* pFlight, const AirportManager *pManager
 		return 0;
 	}
 	int destNameLen = (bytes1[0] << 2 | bytes1[1] >> 6) & 0x1F;
-	pFlight->nameDest = readStringFromFile2(fp, destNameLen);
+	pFlight->nameDest = readStringFromFile2(pFileToLoad, destNameLen);
 	if (findAirportByName(pManager, pFlight->nameDest) == NULL)
 	{
 		printf("Airport %s not in manager\n", pFlight->nameDest);
@@ -200,42 +200,47 @@ int loadFlightFromFileCompressed(Flight* pFlight, const AirportManager *pManager
 	return 1;
 }
 
-int saveFlightToFileCompressed( Flight *pFlight, FILE *fp)
+int saveFlightToFileCompressed(Flight *pFlight, FILE *pFileToSave)
 {
-	BYTE bytes1[2] = { 0 };
-	BYTE bytes2[3] = { 0 };
-	BYTE bytes3[1] = { 0 };
+	BYTE bytes1[2] = {0};
+	BYTE bytes2[3] = {0};
+	BYTE bytes3[1] = {0};
 	int sourceLen = (int)strlen(pFlight->nameSource);
 	int destLen = (int)strlen(pFlight->nameDest);
 	bytes1[0] = sourceLen << 3 | destLen >> 2;
 	bytes1[1] = destLen << 6 | pFlight->thePlane.type << 4 | pFlight->date.month;
-	if (fwrite(&bytes1, sizeof(BYTE), 2, fp) != 2) {
-		fclose(fp);
+	if (fwrite(&bytes1, sizeof(BYTE), 2, pFileToSave) != 2)
+	{
+		fclose(pFileToSave);
 		return 0;
 	}
 	for (size_t i = 0; i < 4; i++)
 	{
-		pFlight->thePlane.code[i]= pFlight->thePlane.code[i]-65;
+		pFlight->thePlane.code[i] = pFlight->thePlane.code[i] - 65;
 	}
 	pFlight->date.year += (-2021);
 	bytes2[0] = pFlight->thePlane.code[0] << 3 | pFlight->thePlane.code[1] >> 2;
 	bytes2[1] = pFlight->thePlane.code[1] << 6 | pFlight->thePlane.code[2] << 1 | pFlight->thePlane.code[3] >> 4;
 	bytes2[2] = pFlight->thePlane.code[3] << 4 | pFlight->date.year;
-	if (fwrite(&bytes2, sizeof(BYTE), 3, fp) !=3) {
-		fclose(fp);
+	if (fwrite(&bytes2, sizeof(BYTE), 3, pFileToSave) != 3)
+	{
+		fclose(pFileToSave);
 		return 0;
 	}
 	bytes3[0] = pFlight->date.day;
-	if (fwrite(&bytes3, sizeof(BYTE), 1, fp) != 1) {
-		fclose(fp);
+	if (fwrite(&bytes3, sizeof(BYTE), 1, pFileToSave) != 1)
+	{
+		fclose(pFileToSave);
 		return 0;
 	}
-	if (fwrite(pFlight->nameSource, sizeof(char), sourceLen, fp) != sourceLen) {
-		fclose(fp);
+	if (fwrite(pFlight->nameSource, sizeof(char), sourceLen, pFileToSave) != sourceLen)
+	{
+		fclose(pFileToSave);
 		return 0;
 	}
-	if (fwrite(pFlight->nameDest, sizeof(char), destLen, fp) != destLen) {
-		fclose(fp);
+	if (fwrite(pFlight->nameDest, sizeof(char), destLen, pFileToSave) != destLen)
+	{
+		fclose(pFileToSave);
 		return 0;
 	}
 	return 1;
