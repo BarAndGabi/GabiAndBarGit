@@ -1,6 +1,0 @@
-﻿  q8.c
-c:\users\afeka\source\repos\project1\project1\q8.c(7): warning C4013: 'Init' undefined; assuming extern returning int
-c:\users\afeka\source\repos\project1\project1\q8.c(9): warning C4013: 'Flip' undefined; assuming extern returning int
-c:\users\afeka\source\repos\project1\project1\q8.c(12): warning C4013: 'DNF' undefined; assuming extern returning int
-c:\users\afeka\source\repos\project1\project1\q8.c(15): warning C4013: 'system' undefined; assuming extern returning int
-  Project1.vcxproj -> C:\Users\afeka\source\repos\Project1\Debug\Q8.exe
