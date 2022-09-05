@@ -1,0 +1,30 @@
+﻿Build started 8/13/2016 7:41:29 PM.
+     1>Project "D:\Work\Graphics\Graphics Winter 2014\B\B\exam\graphics\graphics.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\graphics.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt wheel.cpp
+         wheel.cpp
+     1>d:\work\graphics\graphics winter 2014\b\b\exam\graphics\wheel.cpp(24): warning C4101: 'i' : unreferenced local variable
+     1>d:\work\graphics\graphics winter 2014\b\b\exam\graphics\wheel.cpp(24): warning C4101: 'j' : unreferenced local variable
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\graphics.exe.embed.manifest.res" Debug\graphics_manifest.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib glut.lib /MANIFEST /ManifestFile:"Debug\graphics.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.lib" /MACHINE:X86 Debug\graphics.exe.embed.manifest.res
+         Debug\wheel.obj
+       Manifest:
+         Deleting file "Debug\graphics.exe.embed.manifest".
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\graphics.exe.embed.manifest" /manifest Debug\graphics.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\graphics.exe.embed.manifest.res" Debug\graphics_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib opengl32.lib glu32.lib glut.lib /MANIFEST /ManifestFile:"Debug\graphics.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.lib" /MACHINE:X86 Debug\graphics.exe.embed.manifest.res
+         Debug\wheel.obj
+         graphics.vcxproj -> D:\Work\Graphics\Graphics Winter 2014\B\B\exam\Debug\graphics.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\graphics.unsuccessfulbuild".
+         Touching "Debug\graphics.lastbuildstate".
+     1>Done Building Project "D:\Work\Graphics\Graphics Winter 2014\B\B\exam\graphics\graphics.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:15.13

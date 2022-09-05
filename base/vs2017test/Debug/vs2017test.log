@@ -1,0 +1,4 @@
+﻿  main.cpp
+e:\victor\work\graphics\spring 2020\vs2017test\vs2017test\main.cpp(6): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+e:\victor\work\graphics\spring 2020\vs2017test\vs2017test\main.cpp(25): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  vs2017test.vcxproj -> E:\Victor\Work\Graphics\Spring 2020\vs2017test\Debug\vs2017test.exe

@@ -1,0 +1,5 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (vs2017test.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  main.cpp
+c:\users\afeka\desktop\throwball\vs2017test\vs2017test\main.cpp(17): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+c:\users\afeka\desktop\throwball\vs2017test\vs2017test\main.cpp(177): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  vs2017test.vcxproj -> C:\Users\afeka\Desktop\ThrowBall\vs2017test\Debug\lass.exe
